@@ -42,14 +42,14 @@ const Services = (): ReactElement => {
     return (
       <article
         data-aos="fade-up"
-        key={id}
         data-aos-delay={aosDelay}
+        key={id}
         className="rounded-2xl bg-white hover:bg-primary hover:text-white relative shadow-xl duration-high group max-w-[300px]"
       >
         <div className="h-[122px]">
           <img
             src={img}
-            alt=""
+            alt={name}
             className="max-w-[200px] block mx-auto transform -translate-y-14
           group-hover:scale-105 group-hover:rotate-6 duration-300"
           />
@@ -69,7 +69,7 @@ const Services = (): ReactElement => {
     <div className="py-10">
       <section className="container">
         <article className="text-center mb-20">
-          <p className="text--4xl font-bold font-cursive text-gray-800">
+          <p className="text-4xl font-bold font-cursive text-gray-800">
             Best Coffee For You
           </p>
         </article>

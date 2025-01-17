@@ -5,6 +5,8 @@ import Home from "./components/Home";
 import Navbar from "./components/Navbar";
 import Services from "./components/Services";
 import Banner from "./components/Banner";
+import AppStore from "./components/AppStore";
+import Testimonials from "./components/Testimonials";
 
 const App = (): ReactElement => {
   useEffect(() => {
@@ -21,6 +23,8 @@ const App = (): ReactElement => {
       <Home />
       <Services />
       <Banner />
+      <AppStore />
+      <Testimonials />
     </main>
   );
 };
