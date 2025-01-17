@@ -32,3 +32,12 @@
 .bgStoreImage {
   background-image: url("./assets/website/coffee-beans-bg.png");
 }
+
+.bgFooterImage {
+  background-image: url("./assets/website/coffee-footer.jpg");
+  min-height: 400px;
+}
+
+::-webkit-scrollbar {
+  width: 1px;
+}

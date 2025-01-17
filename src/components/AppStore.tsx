@@ -7,7 +7,7 @@ const AppStore = (): ReactElement => {
     <div className="bgImage bgStoreImage py-14">
       <div className="container">
         <section className="grid grid-cols-1 sm:grid-cols-2 items-center gap-4">
-          <div className="space-y-6 max-w-xl mx-auto">
+          <div data-aos="fade-up" className="space-y-6 max-w-xl mx-auto">
             <p className="text-2xl text-center sm:text-left sm:text-4xl font-semibold pl-3 text-slate-50/90">
               MB Coffee is available for Android and IOS
             </p>

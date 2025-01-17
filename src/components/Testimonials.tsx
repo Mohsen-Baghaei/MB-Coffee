@@ -101,12 +101,12 @@ const Testimonials = (): ReactElement => {
   return (
     <div className="py-14 mb-10">
       <section className="container">
-        <article className="text-center mb-10">
+        <article data-aos="fade-up" className="text-center mb-10">
           <p className="text-4xl font-bold font-cursive text-gray-800">
             Testimonials
           </p>
         </article>
-        <article>
+        <article data-aos="zoom-in">
           <Slider {...settings}>{showTestimonialData}</Slider>
         </article>
       </section>

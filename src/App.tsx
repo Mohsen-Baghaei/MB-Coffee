@@ -7,6 +7,7 @@ import Services from "./components/Services";
 import Banner from "./components/Banner";
 import AppStore from "./components/AppStore";
 import Testimonials from "./components/Testimonials";
+import Footer from "./components/Footer";
 
 const App = (): ReactElement => {
   useEffect(() => {
@@ -18,13 +19,14 @@ const App = (): ReactElement => {
     });
   }, []);
   return (
-    <main className="overflow-x-hidden">
+    <main className="overflow-x-hidden scroll-smooth">
       <Navbar />
       <Home />
       <Services />
       <Banner />
       <AppStore />
       <Testimonials />
+      <Footer />
     </main>
   );
 };

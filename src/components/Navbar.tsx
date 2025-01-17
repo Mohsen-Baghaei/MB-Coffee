@@ -39,9 +39,9 @@ const Navbar = (): ReactElement => {
   ));
   return (
     <div className="bg-gradient-to-r from-secondary to-secondary/90 text-slate-50">
-      <div className="container py-2">
-        <div className="flex justify-between items-center gap-4">
-          <div>
+      <section className="container py-2">
+        <article className="flex justify-between items-center gap-4">
+          <div data-aos="fade-down" data-aos-once="true">
             <a
               href="#"
               className="font-bold text-2xl sm:text-3xl flex justify-center items-center gap-2 tracking-wider font-cursive"
@@ -49,15 +49,20 @@ const Navbar = (): ReactElement => {
               <img src={Logo} alt="Logo" className="size-14" /> MB Coffee
             </a>
           </div>
-          <nav className="flex justify-between items-center gap-4">
+          <nav
+            data-aos="fade-down"
+            data-aos-once="true"
+            data-aos-delay="300"
+            className="flex justify-between items-center gap-4"
+          >
             <ul className="hidden sm:flex items-center gap-4">{showMenu}</ul>
             <button className="bg-primary/70 px-4 py-2 rounded-full hover:scale-105 duration-200 flex items-center gap-3">
               Order
               <FaCoffee className="text-xl cursor-pointer" />
             </button>
           </nav>
-        </div>
-      </div>
+        </article>
+      </section>
     </div>
   );
 };
