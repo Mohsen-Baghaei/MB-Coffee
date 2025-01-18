@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import Img2 from "../assets/coffee2.png";
+import Img2 from "../../assets/coffee2.png";
 
 type ServicesDataType = {
   id: number;

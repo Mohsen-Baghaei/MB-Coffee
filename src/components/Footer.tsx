@@ -1,28 +1,10 @@
 import { ReactElement } from "react";
 import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa6";
-
-const FooterLinks = [
-  {
-    title: "Home",
-    link: "/#",
-  },
-  {
-    title: "About",
-    link: "/#about",
-  },
-  {
-    title: "Contact",
-    link: "/#contact",
-  },
-  {
-    title: "Blog",
-    link: "/#blog",
-  },
-];
+import { Link } from "react-router-dom";
 
 const Footer = (): ReactElement => {
   return (
-    <div className=" text-white bgImage bgFooterImage">
+    <footer className=" text-white bgImage bgFooterImage">
       <div className="bg-black/40 min-h-[400px]">
         <section className="container grid md:grid-cols-3 pb-20 pt-5">
           {/* company details */}
@@ -46,16 +28,30 @@ const Footer = (): ReactElement => {
                 Important Links
               </h1>
               <ul className="space-y-3">
-                {FooterLinks.map((data, index) => (
-                  <li key={index}>
-                    <a
-                      href={data.link}
-                      className="inline-block hover:scale-105 duration-200"
-                    >
-                      {data.title}
-                    </a>
-                  </li>
-                ))}
+                <li>
+                  <Link
+                    to="/"
+                    className="inline-block hover:scale-105 duration-200"
+                  >
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/services"
+                    className="inline-block hover:scale-105 duration-200"
+                  >
+                    Services
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/about"
+                    className="inline-block hover:scale-105 duration-200"
+                  >
+                    About
+                  </Link>
+                </li>
               </ul>
             </article>
             {/* second col links */}
@@ -64,16 +60,30 @@ const Footer = (): ReactElement => {
                 Quick Links
               </h1>
               <ul className="space-y-3">
-                {FooterLinks.map((data, index) => (
-                  <li key={index}>
-                    <a
-                      href={data.link}
-                      className="inline-block hover:scale-105 duration-200 "
-                    >
-                      {data.title}
-                    </a>
-                  </li>
-                ))}
+                <li>
+                  <Link
+                    to="/"
+                    className="inline-block hover:scale-105 duration-200"
+                  >
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/services"
+                    className="inline-block hover:scale-105 duration-200"
+                  >
+                    Services
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/about"
+                    className="inline-block hover:scale-105 duration-200"
+                  >
+                    About
+                  </Link>
+                </li>
               </ul>
             </article>
 
@@ -83,8 +93,8 @@ const Footer = (): ReactElement => {
                 Address
               </h1>
               <div>
-                <p className="mb-3">Noida , Uttar Pradesh</p>
-                <p>+91 1234567890</p>
+                <p className="mb-3">Mashhad, Seyed Razi</p>
+                <a href="tel:+989030737899">Call +98 903 073 7899</a>
 
                 {/* social links */}
                 <div className="flex items-center gap-3 mt-6">
@@ -103,7 +113,7 @@ const Footer = (): ReactElement => {
           </section>
         </section>
       </div>
-    </div>
+    </footer>
   );
 };
 
