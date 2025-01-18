@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./components/Home";
 import Products from "./components/products/Products";
+import SingleProduct from "./components/products/SingleProduct";
 
 const App = (): ReactElement => {
   useEffect(() => {
@@ -14,12 +15,18 @@ const App = (): ReactElement => {
       easing: "ease-in",
       delay: 100,
     });
+    window.onbeforeunload = function () {
+      window.scrollTo(0, 0);
+    };
   }, []);
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="products" element={<Products />} />
+        <Route path="products">
+          <Route index element={<Products />} />
+          <Route path=":productId" element={<SingleProduct />} />
+        </Route>
       </Route>
     </Routes>
   );

@@ -1,25 +1,12 @@
 import { ReactElement } from "react";
 import { EntityId } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
-import { selectById } from "../../app/products/productsSlice";
+import { ProductType, selectById } from "../../app/products/productsSlice";
 import { RootState } from "../../app/store";
+import { Link } from "react-router-dom";
 
 type PropType = {
   productId: EntityId;
-};
-
-type ProductType = {
-  description: string;
-  flavor_profile: string[];
-  grind_option: string[];
-  id: number;
-  image_url: string;
-  name: string;
-  price: number;
-  region: string;
-  roast_level: number;
-  weight: number;
-  _id: string;
 };
 
 const Product = ({ productId }: PropType): ReactElement => {
@@ -29,7 +16,13 @@ const Product = ({ productId }: PropType): ReactElement => {
   console.log(showProduct);
 
   return (
-    <article className="rounded-2xl bg-white hover:bg-primary hover:text-white relative shadow-xl duration-high group w-full mb-5">
+    <Link
+      to={`/products/${productId}`}
+      data-aos="zoom-in"
+      data-aos-delay={`${Number(productId) + 100}`}
+      data-aos-once="true"
+      className="rounded-2xl bg-white hover:bg-primary hover:text-white  shadow-xl duration-high group w-full mb-5"
+    >
       <img
         src={showProduct?.image_url}
         alt={showProduct?.name}
@@ -44,7 +37,7 @@ const Product = ({ productId }: PropType): ReactElement => {
           {showProduct?.description}
         </p>
       </div>
-    </article>
+    </Link>
   );
 };
 

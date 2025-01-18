@@ -8,6 +8,20 @@ import { RootState } from "../store";
 
 const PRODUCTS_URL: string = "https://fake-coffee-api.vercel.app/api";
 
+export type ProductType = {
+  description: string;
+  flavor_profile: string[];
+  grind_option: string[];
+  id: number;
+  image_url: string;
+  name: string;
+  price: number;
+  region: string;
+  roast_level: number;
+  weight: number;
+  _id: string;
+};
+
 const productAdapter = createEntityAdapter({});
 
 const initialState = productAdapter.getInitialState({
