@@ -1,40 +1,5 @@
 import { ReactElement } from "react";
-import Img2 from "../../assets/coffee2.png";
-
-type ServicesDataType = {
-  id: number;
-  img: string;
-  name: string;
-  description: string;
-  aosDelay: string;
-};
-
-const ServicesData: ServicesDataType[] = [
-  {
-    id: 1,
-    img: Img2,
-    name: "Espresso",
-    description:
-      "Lorem ipsum dolor sit amet ipsum dolor sit ametipsum dolor sit amet ipsum dolor sit amet.",
-    aosDelay: "100",
-  },
-  {
-    id: 2,
-    img: Img2,
-    name: "Americano",
-    description:
-      "Lorem ipsum dolor sit amet ipsum dolor sit ametipsum dolor sit amet ipsum dolor sit amet",
-    aosDelay: "300",
-  },
-  {
-    id: 3,
-    img: Img2,
-    name: "Cappuccino",
-    description:
-      "Lorem ipsum dolor sit amet ipsum dolor sit ametipsum dolor sit amet ipsum dolor sit amet",
-    aosDelay: "500",
-  },
-];
+import { ServicesData, ServicesDataType } from "../../app/about/aboutSlice";
 
 const Services = (): ReactElement => {
   const showServicesData = ServicesData.map((service: ServicesDataType) => {

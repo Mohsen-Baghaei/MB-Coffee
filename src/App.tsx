@@ -28,10 +28,31 @@ const App = (): ReactElement => {
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="products">
-          <Route index element={<Products />} />
-          <Route path=":productId" element={<SingleProduct />} />
+          <Route
+            index
+            element={
+              <Suspense fallback={<Loading />}>
+                <Products />
+              </Suspense>
+            }
+          />
+          <Route
+            path=":productId"
+            element={
+              <Suspense fallback={<Loading />}>
+                <SingleProduct />
+              </Suspense>
+            }
+          />
         </Route>
-        <Route path="about" element={<About />} />
+        <Route
+          path="about"
+          element={
+            <Suspense fallback={<Loading />}>
+              <About />
+            </Suspense>
+          }
+        />
       </Route>
     </Routes>
   );

@@ -3,6 +3,114 @@ import mainAbout from "../../assets/about/mainAbout.png";
 import secondAbout from "../../assets/about/secondAbout.png";
 import thirdAbout from "../../assets/about/thirdAbout.png";
 import { RootState } from "../store";
+import Img2 from "../../assets/coffee2.png";
+
+export type TestimonialDataType = {
+  id: number;
+  name: string;
+  text: string;
+  img: string;
+};
+
+export const TestimonialData: TestimonialDataType[] = [
+  {
+    id: 1,
+    name: "Mohsen Baghaei",
+    text: "Some days make the coffee, other days the coffee makes you",
+    img: "https://picsum.photos/101/101",
+  },
+  {
+    id: 2,
+    name: "Reza Nikafkar",
+    text: "Not all wander are lost; some are simply looking for coffee",
+    img: "https://picsum.photos/102/102",
+  },
+  {
+    id: 3,
+    name: "Hassan Asadi",
+    text: "Not all wander are lost; some are simply looking for coffee",
+    img: "https://picsum.photos/104/104",
+  },
+  {
+    id: 5,
+    name: "Reza Kamali",
+    text: "If you’re waiting for a sign to have another coffee, this is it",
+    img: "https://picsum.photos/103/103",
+  },
+];
+
+export const settings = {
+  dots: true,
+  arrows: false,
+  infinite: true,
+  speed: 500,
+  slidesToScroll: 1,
+  autoplay: true,
+  autoplaySpeed: 2000,
+  cssEase: "linear",
+  pauseOnHover: true,
+  pauseOnFocus: true,
+  responsive: [
+    {
+      breakpoint: 10000,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        infinite: true,
+      },
+    },
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        initialSlide: 2,
+      },
+    },
+    {
+      breakpoint: 640,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      },
+    },
+  ],
+};
+
+export type ServicesDataType = {
+  id: number;
+  img: string;
+  name: string;
+  description: string;
+  aosDelay: string;
+};
+
+export const ServicesData: ServicesDataType[] = [
+  {
+    id: 1,
+    img: Img2,
+    name: "Espresso",
+    description:
+      "Our smooth signature Espresso Roast with rich flavor and caramelly sweetness is at the very heart of everything we do.",
+    aosDelay: "100",
+  },
+  {
+    id: 2,
+    img: Img2,
+    name: "Americano",
+    description:
+      "Espresso shots topped with hot water create a light layer of crema culminating in this wonderfully rich cup with depth and nuance.Lorem ipsum dolor sit amet ipsum dolor sit ametipsum dolor sit amet ipsum dolor sit amet",
+    aosDelay: "300",
+  },
+  {
+    id: 3,
+    img: Img2,
+    name: "Cappuccino",
+    description:
+      "Dark, rich espresso lies in wait under a smoothed and stretched layer of thick milk foam. An alchemy of barista artistry and craft.",
+    aosDelay: "500",
+  },
+];
 
 export type AboutStateType = {
   title: string;

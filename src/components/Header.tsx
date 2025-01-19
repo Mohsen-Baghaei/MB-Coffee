@@ -33,10 +33,10 @@ const Header = (): ReactElement => {
               </li>
               <li>
                 <Link
-                  to="/services"
+                  to="/inbag"
                   className="inline-block text-xl py-4 px-4 text-slate-50/70 hover:text-slate-50 duration-200"
                 >
-                  Services
+                  In Bag
                 </Link>
               </li>
               <li>
@@ -52,7 +52,7 @@ const Header = (): ReactElement => {
               to="products"
               className="bg-primary/70 px-4 py-2 rounded-full hover:scale-105 duration-200 flex items-center gap-3"
             >
-              Order
+              Coffees
               <FaCoffee className="text-xl cursor-pointer" />
             </Link>
           </nav>

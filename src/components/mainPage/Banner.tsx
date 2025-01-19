@@ -27,10 +27,9 @@ const Banner = (): ReactElement => {
               data-aos="fade-up"
               className="text-sm text-gray-500 tracking-wide leading-5"
             >
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maxime
-              recusandae sapiente vero suscipit sed voluptatem modi, distinctio
-              fuga eius iusto, cum eos facere cupiditate quia numquam magnam ut
-              repellendus exercitationem!
+              Cozy flavors of sweet pistachio and a brown-buttery topping paired
+              with espresso and steamed milk, specially crafted to keep you
+              comforted in the new year.
             </p>
             <div className="grid grid-cols-2 gap-6">
               <section className="space-y-5">
