@@ -1,11 +1,15 @@
-import { ReactElement, useEffect } from "react";
+import { ReactElement, useEffect, lazy, Suspense } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { Route, Routes } from "react-router-dom";
+
 import Layout from "./components/Layout";
 import Home from "./components/Home";
-import Products from "./components/products/Products";
-import SingleProduct from "./components/products/SingleProduct";
+import Loading from "./components/Loading";
+
+const Products = lazy(() => import("./components/products/Products"));
+const SingleProduct = lazy(() => import("./components/products/SingleProduct"));
+const About = lazy(() => import("./components/About"));
 
 const App = (): ReactElement => {
   useEffect(() => {
@@ -27,6 +31,7 @@ const App = (): ReactElement => {
           <Route index element={<Products />} />
           <Route path=":productId" element={<SingleProduct />} />
         </Route>
+        <Route path="about" element={<About />} />
       </Route>
     </Routes>
   );
