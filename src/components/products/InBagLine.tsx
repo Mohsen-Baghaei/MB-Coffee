@@ -26,7 +26,7 @@ const InBagLine = ({ item }: PropType): ReactElement => {
   }).format(qty! * price);
 
   return (
-    <article className="flex w-full my-5 justify-between items-center">
+    <article className="flex w-full my-5 justify-between items-center border-b-2 border-solid border-gray-300 pb-5">
       <div className="flex items-start justify-start w-4/5 md:w-11/12">
         <img src={img} alt={name} className="size-32 md:size-48" />
         <div className="flex flex-col justify-between w-4/5 mx-5">

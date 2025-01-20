@@ -5,7 +5,7 @@ import Footer from "./Footer";
 
 const Layout = (): ReactElement => {
   return (
-    <main className="overflow-x-hidden scroll-smooth">
+    <main className="overflow-x-hidden scroll-smooth relative min-h-screen">
       <Header />
       <Outlet />
       <Footer />

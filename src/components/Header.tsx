@@ -1,9 +1,20 @@
-import { ReactElement } from "react";
+import { ReactElement, useEffect } from "react";
 import Logo from "../assets/website/coffee_logo.png";
 import { FaCoffee } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Header = (): ReactElement => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    scrollTo();
+  }, [pathname]);
+
+  const scrollTo = () => {
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 500);
+  };
   return (
     <header className="bg-gradient-to-r from-secondary to-secondary/90 text-slate-50">
       <section className="container py-2">

@@ -14,16 +14,15 @@ const InBag = lazy(() => import("./components/products/InBag"));
 
 const App = (): ReactElement => {
   useEffect(() => {
+    window.scrollTo(0, 0);
     AOS.init({
       offset: 100,
       duration: 700,
       easing: "ease-in",
       delay: 100,
     });
-    window.onbeforeunload = function () {
-      window.scrollTo(0, 0);
-    };
   }, []);
+
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
