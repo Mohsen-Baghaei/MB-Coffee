@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { ProductType, selectById } from "../../app/products/productsSlice";
 import { RootState } from "../../app/store";
@@ -8,6 +8,7 @@ import { addToBag } from "../../app/inBag/inBagSlice";
 const SingleProduct = (): ReactElement => {
   const { productId } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const product = useSelector((state: RootState) =>
     selectById(state, Number(productId!))
@@ -28,6 +29,7 @@ const SingleProduct = (): ReactElement => {
 
   const handleAdd = () => {
     dispatch(addToBag({ id, name, img: image_url, weight, price }));
+    navigate("/inbag");
   };
 
   return (

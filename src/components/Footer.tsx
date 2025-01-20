@@ -1,16 +1,10 @@
 import { ReactElement } from "react";
 import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa6";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Footer = (): ReactElement => {
-  const { pathname } = useLocation();
-
-  const showClass = pathname === "/inbag" ? "absolute" : "static";
-
   return (
-    <footer
-      className={`text-white bgImage bgFooterImage bottom-0 ${showClass}`}
-    >
+    <footer className="text-white bgImage bgFooterImage ">
       <div className="bg-black/40 min-h-[400px]">
         <section className="container grid md:grid-cols-3 pb-20 pt-5">
           {/* company details */}

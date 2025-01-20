@@ -24,20 +24,36 @@ const inBagSlice = createSlice({
       );
       const filteredItems: StateType[] = state.filter((item) => item.id !== id);
       const qty: number = existItem ? existItem.qty! + 1 : 1;
-      const itemPrice: string = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(qty * price);
+
       const newState = [
         ...filteredItems,
-        { id, name, img, weight, price, qty, itemPrice },
+        { id, name, img, weight, price, qty },
       ];
       return newState;
+    },
+    updateQty(
+      state: StateType[],
+      action: PayloadAction<{ id: number; qty: number }>
+    ) {
+      const { id, qty } = action.payload;
+      const existItem: StateType | undefined = state.find(
+        (item) => item.id === id
+      );
+      const filteredItems: StateType[] = state.filter((item) => item.id !== id);
+      if (existItem) {
+        const newState = [...filteredItems, { ...existItem, qty }];
+        return newState;
+      }
+    },
+    deleteItem(state: StateType[], action: PayloadAction<{ id: number }>) {
+      const { id } = action.payload;
+      const filteredItems: StateType[] = state.filter((item) => item.id !== id);
+      return filteredItems;
     },
   },
 });
 
-export const { addToBag } = inBagSlice.actions;
+export const { addToBag, updateQty, deleteItem } = inBagSlice.actions;
 
 export const inBagItems = (state: RootState) => state.inBag;
 
