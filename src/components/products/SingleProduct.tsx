@@ -27,7 +27,7 @@ const SingleProduct = (): ReactElement => {
   } = product!;
 
   const handleAdd = () => {
-    dispatch(addToBag(id, name, image_url, weight, price));
+    dispatch(addToBag({ id, name, img: image_url, weight, price }));
   };
 
   return (
