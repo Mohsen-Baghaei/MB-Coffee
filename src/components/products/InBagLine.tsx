@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { memo, ReactElement } from "react";
 import { deleteItem, StateType, updateQty } from "../../app/inBag/inBagSlice";
 import { useDispatch } from "react-redux";
 import { FaMinus, FaPlus, FaTrashAlt } from "react-icons/fa";
@@ -32,14 +32,14 @@ const InBagLine = ({ item }: PropType): ReactElement => {
         <div className="flex flex-col justify-between w-4/5 mx-5">
           <p className="text-2xl md:text-4xl font-semibold mt-5">{name}</p>
           <p className="text-xl md:text-2xl font-semibold mt-2 md:mt-4 flex flex-col md:flex-row justify-between items-start">
-            <p className="flex justify-center items-center gap-2">
+            <span className="flex justify-center items-center gap-2">
               <span>{qty}</span>
               <span>Pieces</span>
-            </p>
-            <p className="flex justify-center items-center gap-2">
+            </span>
+            <span className="flex justify-center items-center gap-2">
               <span className="hidden md:flex">Item Price:</span>
               <span>{itemPrice}</span>
-            </p>
+            </span>
           </p>
           <p className="text-lg font-semibold mt-2 md:mt-4">
             Weight: {weight} g
@@ -64,4 +64,6 @@ const InBagLine = ({ item }: PropType): ReactElement => {
   );
 };
 
-export default InBagLine;
+const memoizedItem = memo(InBagLine);
+
+export default memoizedItem;
