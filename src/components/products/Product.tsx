@@ -13,7 +13,6 @@ const Product = ({ productId }: PropType): ReactElement => {
   const showProduct = useSelector((state: RootState) =>
     selectById(state, productId)
   ) as ProductType | undefined;
-  console.log(showProduct);
 
   return (
     <Link

@@ -10,6 +10,7 @@ import Loading from "./components/Loading";
 const Products = lazy(() => import("./components/products/Products"));
 const SingleProduct = lazy(() => import("./components/products/SingleProduct"));
 const About = lazy(() => import("./components/About"));
+const InBag = lazy(() => import("./components/products/InBag"));
 
 const App = (): ReactElement => {
   useEffect(() => {
@@ -45,6 +46,16 @@ const App = (): ReactElement => {
             }
           />
         </Route>
+
+        <Route
+          path="inbag"
+          element={
+            <Suspense fallback={<Loading />}>
+              <InBag />
+            </Suspense>
+          }
+        />
+
         <Route
           path="about"
           element={
