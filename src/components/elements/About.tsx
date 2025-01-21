@@ -11,6 +11,7 @@ const About = (): ReactElement => {
         const { title, img, text } = item;
         return (
           <article
+            data-aos="zoom-in"
             key={i}
             className="flex flex-col items-start justify-start my-10 border-b-2 border-solid border-gray-400 "
           >

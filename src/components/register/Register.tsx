@@ -6,30 +6,27 @@ import {
   useRef,
   useState,
 } from "react";
-import coffeeregister1 from "../../assets/register/coffeeregister1.png";
-import coffeeregister2 from "../../assets/register/coffeeregister2.png";
-import coffeeregister3 from "../../assets/register/coffeeregister3.png";
-import coffeeregister4 from "../../assets/register/coffeeregister4.png";
+
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RiInformation2Fill } from "react-icons/ri";
+import {
+  createUser,
+  usersError,
+  pictutes,
+} from "../../app/register/registerSlice";
 
 const USER_REGEX: RegExp = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX: RegExp =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
-const pictutes = [
-  coffeeregister1,
-  coffeeregister2,
-  coffeeregister3,
-  coffeeregister4,
-];
-
-const pictute = Math.floor(Math.random() * 4);
+const pictute = Math.floor(Math.random() * 10);
 
 const Register = (): ReactElement => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const error = useSelector(usersError);
 
   const userRef = useRef<HTMLInputElement>(null);
   const errRef = useRef<HTMLParagraphElement>(null);
@@ -46,6 +43,9 @@ const Register = (): ReactElement => {
   const [validMatchPwd, setValidMatchPwd] = useState<boolean>(false);
   const [matchPwdFocus, setMatchPwdFocus] = useState<boolean>(false);
 
+  const [errMsg, setErrMsg] = useState<string>("");
+  const [checkNavigate, setCheckNavigate] = useState<boolean>(false);
+
   useEffect(() => {
     userRef.current?.focus();
   }, []);
@@ -58,6 +58,23 @@ const Register = (): ReactElement => {
     setValidPwd(PWD_REGEX.test(pwd));
     setValidMatchPwd(pwd === matchPwd);
   }, [pwd, matchPwd]);
+
+  useEffect(() => {
+    setErrMsg(error);
+  }, [error]);
+
+  useEffect(() => {
+    setErrMsg("");
+  }, [user, pwd, matchPwd]);
+
+  useEffect(() => {
+    if (!error && validUser && validPwd && validMatchPwd) {
+      navigate("/login");
+      setUser("");
+      setPwd("");
+      setMatchPwd("");
+    }
+  }, [checkNavigate]);
 
   const onUserChange = (e: ChangeEvent<HTMLInputElement>) =>
     setUser(e.target.value);
@@ -75,21 +92,35 @@ const Register = (): ReactElement => {
     const v2: boolean = PWD_REGEX.test(pwd);
 
     if (!v1 || !v2) {
+      setErrMsg("Invalid Entry");
       return;
     }
-
-    setUser("");
-    setPwd("");
-    setMatchPwd("");
-    navigate("/login");
+    dispatch(createUser({ user, pwd }));
+    setCheckNavigate(true);
   };
 
   return (
     <div className="bg-primary/50 text-gray-900 flex justify-center items-start lg:items-center min-h-screen">
       <div className=" m-0 sm:m-10 lg:bg-primary/80 shadow sm:rounded-lg flex justify-center flex-1 mt-10 space-y-16">
-        <div className="lg:w-1/2 xl:w-5/12 sm:p-12">
+        <div
+          data-aos="fade-right"
+          data-aos-once="true"
+          className="lg:w-1/2 xl:w-5/12 sm:p-12 flex flex-col"
+        >
+          <p
+            className={
+              errMsg
+                ? "text-center bg-slate-300 text-red-500 text-sm md:text-base rounded-xl p-3 relative flex outline outline-2 outline-offset-1 outline-red-500 mb-5"
+                : "hidden"
+            }
+            ref={errRef}
+          >
+            {errMsg}
+          </p>
           <div className=" flex flex-col items-start justify-start">
-            <h1 className="text-5xl xl:text-9xl font-cursive">Sign up</h1>
+            <h1 className="text-5xl xl:text-9xl font-cursive lg:mb-10">
+              Sign up
+            </h1>
             <form className="w-full flex-1 mt-8" onSubmit={handleSubmit}>
               <div className="mx-auto max-w-xs">
                 <input
@@ -226,8 +257,12 @@ const Register = (): ReactElement => {
             </form>
           </div>
         </div>
-        <div className="flex-1 p-10 text-center hidden lg:flex">
-          <div className="flex justify-center items-center w-full bg-contain bg-center bg-no-repeat back">
+        <div
+          data-aos="fade-left"
+          data-aos-once="true"
+          className="flex-1 p-10 text-center hidden lg:flex"
+        >
+          <div className="flex justify-center items-center w-full">
             <img
               src={pictutes[pictute]}
               alt="coffeeregister"
