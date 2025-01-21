@@ -6,6 +6,10 @@
 @tailwind utilities;
 
 @layer utilities {
+  .min-h-screen {
+    min-height: calc(100vh - 72px);
+  }
+
   body {
     scroll-behavior: smooth;
   }
