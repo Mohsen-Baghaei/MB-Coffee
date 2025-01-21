@@ -1,12 +1,13 @@
 import { ReactElement } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { FaCoffee } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { closeSidebar, sidebarStatus } from "../../app/setting/settingSlice";
-import { GrCircleInformation } from "react-icons/gr";
-import { CiUser } from "react-icons/ci";
-import { FaPlus } from "react-icons/fa6";
-import { BiHomeAlt2 } from "react-icons/bi";
+
+import coffeeHome from "../../assets/menu/coffeeHome.png";
+import coffeeBag from "../../assets/menu/coffeeBag.png";
+import sign from "../../assets/menu/sign.png";
+import register from "../../assets/menu/register.png";
+import coffeecup from "../../assets/menu/coffeecup.png";
 
 const Sidebar = (): ReactElement => {
   const SidebarStatus = useSelector(sidebarStatus);
@@ -22,38 +23,47 @@ const Sidebar = (): ReactElement => {
 
   return (
     <nav
-      className={`flex bg-primary/80 z-10 absolute right-0 top-[72px] transition ease-in-out duration-500 text-nowrap md:pt-5 sm:mt-2 ${
+      className={`flex bg-gradient-to-r from-secondary to-secondary/90 z-10 absolute right-0 left-0 top-[72px] transition ease-in-out duration-500 text-nowrap md:pt-5 sm:mt-2 rounded-b-3xl ${
         SidebarStatus ? "translate-x-0" : "translate-x-full"
       }`}
     >
-      <section className="flex w-full flex-col justify-start p-2 items-start text-slate-50 gap-3">
+      <section className="flex flex-wrap md:flex-nowrap flex-row w-full justify-around p-2 items-start text-slate-50 gap-3 ">
         <button
           onClick={() => direction("/")}
-          className="w-full flex justify-start items-center p-2 gap-3 hover:"
+          className="flex justify-center items-center p-2 gap-3 bg-primary/70 px-4 py-2 rounded-full hover:scale-105 duration-200"
         >
-          <BiHomeAlt2 className="size-11" />
-          <p className="text-3xl">Index</p>
+          <img src={coffeeHome} alt="coffeeHome" className="size-9" />
+
+          <p className="text-2xl">Home</p>
         </button>
         <button
-          onClick={() => direction("/newtask")}
-          className="w-full flex justify-start items-center p-2 gap-3 hover:"
+          onClick={() => direction("/products")}
+          className="flex justify-center items-center p-2 gap-3 bg-primary/70 px-4 py-2 rounded-full hover:scale-105 duration-200"
         >
-          <FaPlus className="size-11 " />
-          <p className="text-3xl">New Todo</p>
+          <img src={coffeecup} alt="coffeecup" className="size-9" />
+
+          <p className="text-2xl">Coffees</p>
         </button>
         <button
-          onClick={() => direction("/profile")}
-          className="w-full flex justify-start items-center p-2 gap-3 hover:"
+          onClick={() => direction("/inbag")}
+          className="flex justify-start items-center p-2 gap-3 bg-primary/70 px-4 py-2 rounded-full hover:scale-105 duration-200"
         >
-          <CiUser className="size-11 " />
-          <p className="text-3xl">Profile</p>
+          <img src={coffeeBag} alt="coffeeBag" className="size-9" />
+          <p className="text-2xl">In Bag</p>
+        </button>
+        <button
+          onClick={() => direction("/register")}
+          className="flex justify-start items-center p-2 gap-3 bg-primary/70 px-4 py-2 rounded-full hover:scale-105 duration-200"
+        >
+          <img src={register} alt="register" className="size-9 " />
+          <p className="text-2xl">Register</p>
         </button>
         <button
           onClick={() => direction("/about")}
-          className="w-full flex justify-start items-center p-2 gap-3 hover:"
+          className="flex justify-start items-center p-2 gap-3 bg-primary/70 px-4 py-2 rounded-full hover:scale-105 duration-200"
         >
-          <GrCircleInformation className="size-11 " />
-          <p className="text-3xl">About</p>
+          <img src={sign} alt="sign" className="size-9 " />
+          <p className="text-2xl">About</p>
         </button>
       </section>
     </nav>

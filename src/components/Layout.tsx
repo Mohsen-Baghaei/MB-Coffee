@@ -6,7 +6,7 @@ import Sidebar from "./elements/Sidebar";
 
 const Layout = (): ReactElement => {
   return (
-    <main className="overflow-x-hidden scroll-smooth min-h-screen">
+    <main className="overflow-x-hidden scroll-smooth min-h-screen relative">
       <Header />
       <Sidebar />
       <Outlet />

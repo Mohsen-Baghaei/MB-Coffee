@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 
-const Login = (): ReactElement => {
+const Missing = (): ReactElement => {
   return <div></div>;
 };
 
-export default Login;
+export default Missing;

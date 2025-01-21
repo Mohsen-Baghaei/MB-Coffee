@@ -11,6 +11,8 @@ const Products = lazy(() => import("./components/products/Products"));
 const SingleProduct = lazy(() => import("./components/products/SingleProduct"));
 const About = lazy(() => import("./components/elements/About"));
 const InBag = lazy(() => import("./components/products/InBag"));
+const Register = lazy(() => import("./components/register/Register"));
+const Login = lazy(() => import("./components/register/Login"));
 
 const App = (): ReactElement => {
   useEffect(() => {
@@ -51,6 +53,23 @@ const App = (): ReactElement => {
           element={
             <Suspense fallback={<Loading />}>
               <InBag />
+            </Suspense>
+          }
+        />
+
+        <Route
+          path="register"
+          element={
+            <Suspense fallback={<Loading />}>
+              <Register />
+            </Suspense>
+          }
+        />
+        <Route
+          path="login"
+          element={
+            <Suspense fallback={<Loading />}>
+              <Login />
             </Suspense>
           }
         />
