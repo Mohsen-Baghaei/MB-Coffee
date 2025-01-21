@@ -9,7 +9,7 @@ const Products = (): ReactElement => {
   return (
     <div className="py-16 w-full">
       <section className="container">
-        <article className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-14 md:gap-8 place-items-center">
+        <article className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-14 md:gap-8 place-items-center">
           {showProducts.map((product) => (
             <Product key={product} productId={product} />
           ))}

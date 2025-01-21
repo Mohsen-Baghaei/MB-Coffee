@@ -5,42 +5,44 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  scroll-behavior: smooth;
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
+@layer utilities {
+  body {
+    scroll-behavior: smooth;
   }
-  to {
-    transform: rotate(360deg);
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
-}
 
-.spin {
-  animation: spin 40s linear infinite;
-}
+  .spin {
+    animation: spin 40s linear infinite;
+  }
 
-.bgImage {
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 100%;
-}
-.bgBannerImage {
-  background-image: url("./assets/website/coffee-texture.jpg");
-  background-color: #270c03;
-}
-.bgStoreImage {
-  background-image: url("./assets/website/coffee-beans-bg.png");
-}
+  .bgImage {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+  }
+  .bgBannerImage {
+    background-image: url("./assets/website/coffee-texture.jpg");
+    background-color: #270c03;
+  }
+  .bgStoreImage {
+    background-image: url("./assets/website/coffee-beans-bg.png");
+  }
 
-.bgFooterImage {
-  background-image: url("./assets/website/coffee-footer.jpg");
-  min-height: 400px;
-}
+  .bgFooterImage {
+    background-image: url("./assets/website/coffee-footer.jpg");
+    min-height: 400px;
+  }
 
-::-webkit-scrollbar {
-  width: 0px;
+  ::-webkit-scrollbar {
+    width: 0px;
+  }
 }

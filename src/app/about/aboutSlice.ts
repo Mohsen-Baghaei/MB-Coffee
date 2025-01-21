@@ -16,26 +16,62 @@ export const TestimonialData: TestimonialDataType[] = [
   {
     id: 1,
     name: "Mohsen Baghaei",
-    text: "Some days make the coffee, other days the coffee makes you",
+    text: "I no longer go to Starbucks for my coffee. I purchase your bags of coffee, specifically Evangeline's Blend, and brew at home. Your coffee is amazing and I'm happy to eliminate pesticides from my coffee. Thank you!",
     img: "https://picsum.photos/101/101",
   },
   {
     id: 2,
     name: "Reza Nikafkar",
-    text: "Not all wander are lost; some are simply looking for coffee",
+    text: "You have not tried fresh coffee until you've tried Fresh Coffee Scoop coffee. We saw this coffee roasted meticulously and shipped as soon as it comes out of the roaster. Just try one bag and you will be hooked. We are true coffee and this is the only coffee that suits our tastes. Try it in a french press for an unbelievable fresh coffee experience!",
     img: "https://picsum.photos/102/102",
   },
   {
     id: 3,
     name: "Hassan Asadi",
-    text: "Not all wander are lost; some are simply looking for coffee",
+    text: "I purchased your coffee (coffee lover's blend) this weekend at Rice's and I am hoooked. I opened my bag of beans and the aroma was incredible. I never realized that the coffee could smell that good. I couldn't wait to grind them up and make a pot. By far the best coffee I have ever brewed at home. I am going to be spreading the word to my other coffee lovers. Thank you.",
     img: "https://picsum.photos/104/104",
   },
   {
-    id: 5,
+    id: 4,
     name: "Reza Kamali",
-    text: "If you’re waiting for a sign to have another coffee, this is it",
+    text: "I have been a bit slack in the coffee ordering as of late...the other day my 17 year old got all over me saying, stop buying average coffee just because you have coupons and get back to ordering the best coffee around from Uncle Warren...enough said :)",
     img: "https://picsum.photos/103/103",
+  },
+  {
+    id: 5,
+    name: "Reza Alborzi",
+    text: "My favorite espresso. Anyone who enjoys a good espresso should definitely order their espresso!! And its clean, like all their coffee; no added poisons. Can't beat that. Enjoy!!",
+    img: "https://picsum.photos/105/105",
+  },
+  {
+    id: 6,
+    name: "Maryam Shoja",
+    text: "Your Komodo Decaf coffee is the best decaf I've ever tasted. I really like the full-bodied, low-acid, espresso type of coffee, and it seems hard to find in a decaf coffee. So glad to have discovered The Coffee Scoop.",
+    img: "https://picsum.photos/106/106",
+  },
+  {
+    id: 7,
+    name: "Ahmad IranManesh",
+    text: "I tried your coffee this past summer when my husband and I started going to the Wrightstown Farmer's market. I haven't missed a week since for your delicious coffee. I used to buy the very popular coffee and found that yours was better tasting, better kept and made the perfect cup every time!! I even got my other family member hooked on it as well!! Thank you for the best cup of coffee!",
+    img: "https://picsum.photos/107/107",
+  },
+  {
+    id: 8,
+    name: "Mohammad Akhbari",
+    text: "I got hooked on your Komodo DECAF last summer at the Stockton Farmers Market...and was crushed to find you are not there this year. Never had a decaf coffee that is so rich in flavor (I only drink decaf), and my son who has some issues with gastric reflux can drink only this coffee. I have found your beans at other places, so I am happy!",
+    img: "https://picsum.photos/108/108",
+  },
+  {
+    id: 9,
+    name: "Mohammad Akrami",
+    text: "Have you ever wished that coffee could taste as good as the aroma? Mostly I am disappointed. But your coffee tastes as good as it smells. It's the best coffee I have ever had... period!",
+    img: "https://picsum.photos/109/109",
+  },
+  {
+    id: 10,
+    name: "Reza Abedi",
+    text: "The best coffee yet. Being from the Northwest around the Seattle area and exposed to many famous brands of coffee, and I've tried them all. This is the best yet. Anyone that hasn't tried yours is missing out. Even sending your coffee across the country, it is still the freshest I've had.",
+    img: "https://picsum.photos/110/110",
   },
 ];
 

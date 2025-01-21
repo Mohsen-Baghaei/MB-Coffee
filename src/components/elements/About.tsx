@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import { useSelector } from "react-redux";
-import { aboutContent } from "../app/about/aboutSlice";
+import { aboutContent } from "../../app/about/aboutSlice";
 
 const About = (): ReactElement => {
   const content = useSelector(aboutContent);

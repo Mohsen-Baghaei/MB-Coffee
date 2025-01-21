@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import coffee from "../assets/coffee.gif";
+import coffee from "../../assets/coffee.gif";
 
 const Loading = (): ReactElement => {
   return (

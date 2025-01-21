@@ -4,12 +4,12 @@ import "aos/dist/aos.css";
 import { Route, Routes } from "react-router-dom";
 
 import Layout from "./components/Layout";
-import Home from "./components/Home";
-import Loading from "./components/Loading";
+import Home from "./components/elements/Home";
+import Loading from "./components/elements/Loading";
 
 const Products = lazy(() => import("./components/products/Products"));
 const SingleProduct = lazy(() => import("./components/products/SingleProduct"));
-const About = lazy(() => import("./components/About"));
+const About = lazy(() => import("./components/elements/About"));
 const InBag = lazy(() => import("./components/products/InBag"));
 
 const App = (): ReactElement => {

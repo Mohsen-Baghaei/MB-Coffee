@@ -10,9 +10,13 @@ const InBag = (): ReactElement => {
 
   return (
     <section className="flex flex-col justify-center items-center w-full p-1 md:p-5">
-      {orderedItems.map((item) => (
-        <InBagLine key={item.id} item={item} />
-      ))}
+      {orderedItems.length ? (
+        orderedItems.map((item) => <InBagLine key={item.id} item={item} />)
+      ) : (
+        <p className="text-2xl p-10 flex items-center justify-center">
+          The Bag Is Empty
+        </p>
+      )}
     </section>
   );
 };

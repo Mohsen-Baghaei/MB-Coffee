@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 
 const Footer = (): ReactElement => {
   return (
-    <footer className="text-white bgImage bgFooterImage bottom-0 ">
-      <div className="bg-black/40 min-h-[400px] ">
+    <footer className="text-white bgImage bgFooterImage">
+      <div className="bg-black/40 min-h-[400px]">
         <section className="container grid md:grid-cols-3 pb-20 pt-5">
           <article className="py-8 px-4">
             <a
