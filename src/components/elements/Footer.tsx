@@ -98,7 +98,7 @@ const Footer = (): ReactElement => {
               </h1>
               <div>
                 <p className="mb-3">Mashhad, Seyed Razi</p>
-                <a href="tel:+989030737899">Call +98 903 073 7899</a>
+                <a href="tel:+980101010101">Call +98 010 101 0101</a>
 
                 <div className="flex items-center gap-3 mt-6">
                   <a href="#">

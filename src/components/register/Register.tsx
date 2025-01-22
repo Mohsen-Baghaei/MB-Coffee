@@ -74,6 +74,7 @@ const Register = (): ReactElement => {
       setPwd("");
       setMatchPwd("");
     }
+    setCheckNavigate(false);
   }, [checkNavigate]);
 
   const onUserChange = (e: ChangeEvent<HTMLInputElement>) =>

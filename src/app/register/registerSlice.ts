@@ -64,6 +64,7 @@ const registerSlice = createSlice({
         const loggedIn = false;
         state.users.push({ id, user, pwd, loggedIn });
         localStorage.setItem("user", JSON.stringify(state.users));
+        state.error = "";
       }
     },
     authorizUser(
@@ -77,6 +78,7 @@ const registerSlice = createSlice({
       if (existUser) {
         existUser.loggedIn = true;
         localStorage.setItem("user", JSON.stringify(state.users));
+        state.error = "";
       } else {
         state.error = "Invalid Username or Password";
       }
@@ -87,6 +89,7 @@ const registerSlice = createSlice({
       if (existUser) {
         existUser.loggedIn = false;
         localStorage.setItem("user", JSON.stringify(state.users));
+        state.error = "";
       }
     },
   },
