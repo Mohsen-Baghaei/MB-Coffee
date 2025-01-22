@@ -14,7 +14,7 @@ const InBag = lazy(() => import("./components/products/InBag"));
 const Register = lazy(() => import("./components/register/Register"));
 const Login = lazy(() => import("./components/register/Login"));
 const Missing = lazy(() => import("./components/elements/Missing"));
-const Profile = lazy(() => import("./components/elements/Profile"));
+const Profile = lazy(() => import("./components/profile/Profile"));
 
 const App = (): ReactElement => {
   useEffect(() => {

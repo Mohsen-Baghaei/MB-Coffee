@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 
-const Profile = (): ReactElement => {
+const Orders = (): ReactElement => {
   return <div></div>;
 };
 
-export default Profile;
+export default Orders;
