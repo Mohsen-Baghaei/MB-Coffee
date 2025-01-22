@@ -101,7 +101,7 @@ const Register = (): ReactElement => {
   };
 
   return (
-    <div className="bg-primary/50 text-gray-900 flex justify-center items-start lg:items-center min-h-screen">
+    <div className="bg-primary/50 text-gray-900 flex justify-center items-start lg:items-center min-h-screen-small sm:min-h-screen-big">
       <div className=" m-0 sm:m-10 lg:bg-primary/80 shadow sm:rounded-lg flex justify-center flex-1 mt-10 space-y-16">
         <div
           data-aos="fade-right"

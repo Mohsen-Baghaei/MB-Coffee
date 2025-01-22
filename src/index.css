@@ -6,8 +6,11 @@
 @tailwind utilities;
 
 @layer utilities {
-  .min-h-screen {
+  .min-h-screen-small {
     min-height: calc(100vh - 72px);
+  }
+  .min-h-screen-big {
+    min-height: calc(100vh - 80px);
   }
 
   body {
