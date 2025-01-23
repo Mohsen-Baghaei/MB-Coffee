@@ -1,1 +1,1 @@
-
+'Kerman' 'Mahan' 'Bam' 'Shahdad' 'Babak City' 'Rafsanjan' 'Sirjan' 'Maymand' 'Jiroft' 'Qale' 'Ganj ghanj'   anar   Texture   Birdwatching   Rubber   Rover   Zarand   Amberabad   Faryab   Fahraj   Manojan 

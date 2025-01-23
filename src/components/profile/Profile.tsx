@@ -3,6 +3,7 @@ import { CiLocationOn, CiLogout } from "react-icons/ci";
 import { FaRegUser } from "react-icons/fa6";
 import { FiShoppingBag } from "react-icons/fi";
 import { MdFavoriteBorder } from "react-icons/md";
+import Address from "./Address";
 
 const Profile = (): ReactElement => {
   return (
@@ -37,7 +38,9 @@ const Profile = (): ReactElement => {
           <p className="text-xl font-semibold ">Logout</p>
         </div>
       </article>
-      <article className="hidden lg:flex lg:w-8/12 xl:w-10/12  flex-col items-start justify-sta"></article>
+      <article className="hidden lg:flex lg:w-8/12 xl:w-10/12  flex-col items-start justify-start p-5">
+        <Address />
+      </article>
     </section>
   );
 };

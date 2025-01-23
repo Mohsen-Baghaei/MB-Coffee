@@ -25,6 +25,44 @@ export const pictutes = [
   coffeeregister10,
 ];
 
+export type StateOptionsType = {
+  name: string;
+};
+
+export const stateOptions: StateOptionsType[] = [
+  { name: "Azerbaijan sharghi" },
+  { name: "Azerbaijan gharbi" },
+  { name: "Ardabil" },
+  { name: "Isfahan" },
+  { name: "Alborz" },
+  { name: "Ilam" },
+  { name: "Bushehr" },
+  { name: "Tehran" },
+  { name: "Chaharmahal and Bakhtiari" },
+  { name: "Khorasan jonobi" },
+  { name: " Khorasan Razavi" },
+  { name: "Khorasan shomali" },
+  { name: "Khuzestan" },
+  { name: "Zanjan" },
+  { name: "Semnan" },
+  { name: "Sistan and Baluchestan" },
+  { name: "Fars" },
+  { name: "Qazvin" },
+  { name: "Qom" },
+  { name: "Golestan" },
+  { name: "Gilan" },
+  { name: "Lorestan" },
+  { name: "Mazandaran" },
+  { name: "Markazi" },
+  { name: "Hormozgan" },
+  { name: "Hamadan" },
+  { name: "Kurdistan" },
+  { name: "Kerman" },
+  { name: "Kermanshah" },
+  { name: "Kohgiluyeh and Boyer-Ahmad" },
+  { name: "Yazd" },
+];
+
 export type usersType = {
   user: string;
   pwd: string;
