@@ -1,14 +1,21 @@
-import { ChangeEvent, ReactElement, useState } from "react";
+import { ChangeEvent, FormEvent, ReactElement, useState } from "react";
 import {
+  createAddress,
+  selectedUsers,
   stateOptions,
   StateOptionsType,
-} from "../../app/register/registerSlice";
+} from "../../../app/register/registerSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const Address = (): ReactElement => {
   const [state, setState] = useState<string>(stateOptions[7].name);
   const [city, setCity] = useState<string>("");
   const [addressPath, setAddressPath] = useState<string>("");
   const [zipCode, setZipCode] = useState<string>("");
+
+  const dispatch = useDispatch();
+
+  const user = useSelector(selectedUsers);
 
   const onStateChange = (e: ChangeEvent<HTMLSelectElement>) =>
     setState(e.target.value);
@@ -22,8 +29,25 @@ const Address = (): ReactElement => {
   const onZipCodeChange = (e: ChangeEvent<HTMLInputElement>) =>
     setZipCode(e.target.value);
 
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    dispatch(
+      createAddress({
+        id: user?.id!,
+        province: state,
+        city,
+        location: addressPath,
+        postalCode: zipCode,
+      })
+    );
+  };
+
   return (
-    <section className="flex flex-col items-center justify-center w-full gap-7">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col items-center justify-center w-full gap-7"
+    >
       <div className="flex flex-col sm:flex-row w-full gap-2 ">
         <div className="w-full sm:w-1/2  flex flex-col justify-center items-start gap-1">
           <label htmlFor="state" className="text-xl font-semibold mb-1">
@@ -32,6 +56,7 @@ const Address = (): ReactElement => {
           <select
             id="state"
             name="state"
+            required
             className="block w-full rounded-md bg-white  text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-400 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-xl/6 p-3"
             value={state}
             onChange={onStateChange}
@@ -51,8 +76,8 @@ const Address = (): ReactElement => {
             type="text"
             id="city"
             name="city"
+            required
             placeholder="Tehran"
-            pattern="([A-Z])[\w\s.]{1,}"
             className="block w-full rounded-md bg-white  text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-400 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-xl/6 p-3"
             value={city}
             onChange={onCityChange}
@@ -62,14 +87,14 @@ const Address = (): ReactElement => {
       <div className="flex flex-col sm:flex-row w-full gap-2 ">
         <div className="w-full sm:w-1/2  flex flex-col justify-center items-start gap-1">
           <label htmlFor="zipCode" className="text-xl font-semibold mb-1">
-            Postal code
+            Postal Code
           </label>
           <input
             type="text"
             id="zipCode"
             name="zipCode"
+            required
             placeholder="12345"
-            pattern="[0-9]{5}"
             maxLength={5}
             className="block w-full rounded-md bg-white  text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-400 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-xl/6 p-3"
             value={zipCode}
@@ -85,14 +110,23 @@ const Address = (): ReactElement => {
             type="text"
             id="address"
             name="address"
-            pattern="[\w\d\s.#]{2,}"
+            required
             className="block w-full rounded-md bg-white  text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-400 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-xl/6 p-3"
             value={addressPath}
             onChange={onAddressChange}
           />
         </div>
       </div>
-    </section>
+      <div className="flex items-center justify-center sm:justify-end w-full gap-2 ">
+        <button
+          disabled={!state || !city || !addressPath || !zipCode ? true : false}
+          type="submit"
+          className="w-full sm:w-1/2 flex justify-center items-center gap-1 tracking-wider font-semibold bg-secondary/70 text-gray-100 py-4 rounded-lg hover:bg-secondary transition-all duration-300 ease-in-out focus:shadow-outline focus:outline-none disabled:bg-secondary/40"
+        >
+          Add Address
+        </button>
+      </div>
+    </form>
   );
 };
 

@@ -63,11 +63,20 @@ export const stateOptions: StateOptionsType[] = [
   { name: "Yazd" },
 ];
 
+type addressType = {
+  addressId: number;
+  province: string;
+  city: string;
+  location: string;
+  postalCode: string;
+};
+
 export type usersType = {
   user: string;
   pwd: string;
   id: number;
   loggedIn: boolean;
+  userAddress: addressType[];
 };
 
 export type UserStateType = {
@@ -92,15 +101,16 @@ const registerSlice = createSlice({
       action: PayloadAction<{ user: string; pwd: string }>
     ) {
       const { user, pwd } = action.payload;
-      const id = state.users.length
+      const id: number = state.users.length
         ? state.users[state.users.length - 1].id + 1
         : 1;
+      const userAddress: addressType[] = [];
       const duplicate = state.users.find((username) => username.user === user);
       if (duplicate) {
         state.error = "Username Taken";
       } else {
         const loggedIn = false;
-        state.users.push({ id, user, pwd, loggedIn });
+        state.users.push({ id, user, pwd, loggedIn, userAddress });
         localStorage.setItem("user", JSON.stringify(state.users));
         state.error = "";
       }
@@ -121,7 +131,12 @@ const registerSlice = createSlice({
         state.error = "Invalid Username or Password";
       }
     },
-    logoutUser(state: UserStateType, action: PayloadAction<{ id: number }>) {
+    logoutUser(
+      state: UserStateType,
+      action: PayloadAction<{
+        id: number;
+      }>
+    ) {
       const { id } = action.payload;
       const existUser = state.users.find((username) => username.id === id);
       if (existUser) {
@@ -130,10 +145,92 @@ const registerSlice = createSlice({
         state.error = "";
       }
     },
+    createAddress(
+      state: UserStateType,
+      action: PayloadAction<{
+        id: number;
+        province: string;
+        city: string;
+        location: string;
+        postalCode: string;
+      }>
+    ) {
+      const { id, province, city, location, postalCode } = action.payload;
+
+      const existUser = state.users.find((person) => person.id === id);
+      if (existUser) {
+        const addressId: number = existUser.userAddress?.length
+          ? existUser.userAddress[existUser.userAddress.length - 1].addressId +
+            1
+          : 1;
+        existUser.userAddress.push({
+          addressId,
+          province,
+          city,
+          location,
+          postalCode,
+        });
+        localStorage.setItem("user", JSON.stringify(state.users));
+        state.error = "";
+      }
+    },
+    updateAddress(
+      state: UserStateType,
+      action: PayloadAction<{
+        id: number;
+        addressId: number;
+        province: string;
+        city: string;
+        location: string;
+        postalCode: string;
+      }>
+    ) {
+      const { id, addressId, province, city, location, postalCode } =
+        action.payload;
+
+      const existUser = state.users.find((person) => person.id === id);
+
+      const existAddress = existUser?.userAddress.find(
+        (address) => address.addressId === addressId
+      );
+      const filteredAddress = existUser?.userAddress.filter(
+        (address) => address.addressId !== addressId
+      );
+      if (existAddress && existUser && filteredAddress) {
+        existUser.userAddress = [
+          ...filteredAddress,
+          { addressId, province, city, location, postalCode },
+        ];
+      }
+    },
+    deleteAddress(
+      state: UserStateType,
+      action: PayloadAction<{
+        id: number;
+        addressId: number;
+      }>
+    ) {
+      const { id, addressId } = action.payload;
+
+      const existUser = state.users.find((person) => person.id === id);
+      const filteredAddress = existUser?.userAddress.filter(
+        (address) => address.addressId !== addressId
+      );
+      if (existUser && filteredAddress) {
+        existUser.userAddress = [...filteredAddress];
+      }
+    },
   },
 });
 
-export const { createUser, authorizUser, logoutUser } = registerSlice.actions;
+export const {
+  createUser,
+  authorizUser,
+  logoutUser,
+  createAddress,
+  updateAddress,
+  deleteAddress,
+} = registerSlice.actions;
 
 export const selectedUsers = (state: RootState) =>
   state.register?.users?.find((person) => person.loggedIn === true);

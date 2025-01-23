@@ -9,3 +9,4 @@
 [] add email // phone number // bithday //
 [] add avatar and name to user
 }
+[] if some one is logged in you can not register or login again

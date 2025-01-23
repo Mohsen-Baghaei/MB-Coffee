@@ -25,6 +25,9 @@ const Login = (): ReactElement => {
   const error = useSelector(usersError);
   const loginStatus = useSelector(selectedUsers);
 
+  const hi = useSelector(selectedUsers);
+  console.log(hi);
+
   const userRef = useRef<HTMLInputElement>(null);
   const errRef = useRef<HTMLParagraphElement>(null);
 

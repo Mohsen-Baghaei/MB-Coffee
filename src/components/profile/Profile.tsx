@@ -3,7 +3,7 @@ import { CiLocationOn, CiLogout } from "react-icons/ci";
 import { FaRegUser } from "react-icons/fa6";
 import { FiShoppingBag } from "react-icons/fi";
 import { MdFavoriteBorder } from "react-icons/md";
-import Address from "./Address";
+import Address from "./address/Address";
 
 const Profile = (): ReactElement => {
   return (
