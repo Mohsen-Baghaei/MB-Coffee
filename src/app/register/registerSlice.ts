@@ -171,7 +171,6 @@ const registerSlice = createSlice({
           postalCode,
         });
         localStorage.setItem("user", JSON.stringify(state.users));
-        state.error = "";
       }
     },
     updateAddress(
@@ -201,6 +200,7 @@ const registerSlice = createSlice({
           ...filteredAddress,
           { addressId, province, city, location, postalCode },
         ];
+        localStorage.setItem("user", JSON.stringify(state.users));
       }
     },
     deleteAddress(
@@ -218,6 +218,7 @@ const registerSlice = createSlice({
       );
       if (existUser && filteredAddress) {
         existUser.userAddress = [...filteredAddress];
+        localStorage.setItem("user", JSON.stringify(state.users));
       }
     },
   },
