@@ -1,11 +1,10 @@
 import { ChangeEvent, FormEvent, ReactElement, useState } from "react";
 import {
   createAddress,
-  selectedUsers,
   stateOptions,
   StateOptionsType,
 } from "../../../app/register/registerSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 const NewAddress = (): ReactElement => {
   const [state, setState] = useState<string>(stateOptions[7].name);
   const [city, setCity] = useState<string>("");
@@ -13,8 +12,6 @@ const NewAddress = (): ReactElement => {
   const [zipCode, setZipCode] = useState<string>("");
 
   const dispatch = useDispatch();
-
-  const user = useSelector(selectedUsers);
 
   const onStateChange = (e: ChangeEvent<HTMLSelectElement>) =>
     setState(e.target.value);
@@ -49,7 +46,7 @@ const NewAddress = (): ReactElement => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col items-center justify-center w-full gap-7"
+      className="flex flex-col items-center justify-center w-full gap-7 p-5"
     >
       <div className="flex flex-col sm:flex-row w-full gap-2 ">
         <div className="w-full sm:w-1/2  flex flex-col justify-center items-start gap-1">

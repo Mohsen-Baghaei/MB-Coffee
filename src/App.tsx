@@ -6,6 +6,7 @@ import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./components/elements/Home";
 import Loading from "./components/elements/Loading";
+import Address from "./components/profile/address/Address";
 
 const Products = lazy(() => import("./components/products/Products"));
 const SingleProduct = lazy(() => import("./components/products/SingleProduct"));
@@ -84,14 +85,16 @@ const App = (): ReactElement => {
             </Suspense>
           }
         />
-        <Route
-          path="profile"
-          element={
-            <Suspense fallback={<Loading />}>
-              <Profile />
-            </Suspense>
-          }
-        />
+        <Route path="profile">
+          <Route
+            index
+            element={
+              <Suspense fallback={<Loading />}>
+                <Profile />
+              </Suspense>
+            }
+          />
+        </Route>
 
         <Route
           path="*"

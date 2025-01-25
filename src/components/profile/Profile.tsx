@@ -34,11 +34,11 @@ const Profile = (): ReactElement => {
         </div>
 
         <div className="w-full flex items-center gap-4 border-b-2 border-solid border-gray-400 p-5">
-          <CiLogout className="size-8" />
+          <CiLogout className="size-8 " />
           <p className="text-xl font-semibold ">Logout</p>
         </div>
       </article>
-      <article className="hidden lg:flex lg:w-8/12 xl:w-10/12  flex-col items-start justify-start p-5">
+      <article className="hidden lg:flex lg:w-8/12 xl:w-10/12  flex-col items-start justify-start ">
         <Address />
       </article>
     </section>
