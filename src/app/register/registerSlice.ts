@@ -238,6 +238,14 @@ export const selectedUsers = (state: RootState) =>
 
 export const allUsers = (state: RootState) => state.register?.users;
 
+export const selectedAddress = (state: RootState, addressId: number) => {
+  const user = state.register.users.find((person) => person.loggedIn === true);
+  const address = user?.userAddress.find(
+    (location) => location.addressId === addressId
+  );
+  return address;
+};
+
 export const usersError = (state: RootState) => state.register?.error;
 
 export default registerSlice.reducer;

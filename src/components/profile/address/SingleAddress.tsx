@@ -25,7 +25,11 @@ const SingleAddress = ({ address, userId }: PropType): ReactElement => {
   };
 
   return (
-    <article className="flex justify-between items-start w-full p-2 border-2 border-solid border-gray-500 rounded-xl">
+    <article
+      data-aos="fade-right"
+      data-aos-once="true"
+      className="flex justify-between items-start w-full p-2 border-2 border-solid border-gray-500 rounded-xl"
+    >
       <div className="flex flex-col gap-2 w-11/12">
         <p className="flex justify-start items-center gap-2 text-xl p-2">
           <FaMapLocation className="size-6 text-gray-400" /> {showAddress}

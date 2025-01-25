@@ -1,23 +1,30 @@
 import { ChangeEvent, FormEvent, ReactElement, useState } from "react";
 import {
   createAddress,
+  selectedAddress,
   selectedUsers,
   stateOptions,
   StateOptionsType,
+  updateAddress,
 } from "../../../app/register/registerSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa6";
+import { RootState } from "../../../app/store";
 
 const EditAddress = (): ReactElement => {
   const user = useSelector(selectedUsers);
 
   const { addressId } = useParams();
 
-  const [state, setState] = useState<string>(stateOptions[7].name);
-  const [city, setCity] = useState<string>("");
-  const [addressPath, setAddressPath] = useState<string>("");
-  const [zipCode, setZipCode] = useState<string>("");
+  const address = useSelector((state: RootState) =>
+    selectedAddress(state, Number(addressId))
+  );
+
+  const [state, setState] = useState<string>(address?.province!);
+  const [city, setCity] = useState<string>(address?.city!);
+  const [addressPath, setAddressPath] = useState<string>(address?.location!);
+  const [zipCode, setZipCode] = useState<string>(address?.postalCode!);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -38,8 +45,9 @@ const EditAddress = (): ReactElement => {
     e.preventDefault();
 
     dispatch(
-      createAddress({
+      updateAddress({
         id: user?.id!,
+        addressId: Number(addressId),
         province: state,
         city,
         location: addressPath,
@@ -55,7 +63,11 @@ const EditAddress = (): ReactElement => {
   };
   return (
     <>
-      <div className="flex gap-4 justify-center items-center p-5">
+      <div
+        data-aos="fade-right"
+        data-aos-once="true"
+        className="flex gap-4 justify-center items-center p-5"
+      >
         <Link to="/profile/address">
           <FaArrowLeft className="size-6 cursor-pointer" />
         </Link>
@@ -67,7 +79,11 @@ const EditAddress = (): ReactElement => {
         className="flex flex-col items-center justify-center w-full gap-7 p-5"
       >
         <div className="flex flex-col sm:flex-row w-full gap-2 ">
-          <div className="w-full sm:w-1/2  flex flex-col justify-center items-start gap-1">
+          <div
+            data-aos="fade-right"
+            data-aos-once="true"
+            className="w-full sm:w-1/2  flex flex-col justify-center items-start gap-1"
+          >
             <label htmlFor="state" className="text-xl font-semibold mb-1">
               Province
             </label>
@@ -86,7 +102,11 @@ const EditAddress = (): ReactElement => {
               ))}
             </select>
           </div>
-          <div className="w-full sm:w-1/2  flex flex-col justify-center items-start gap-1">
+          <div
+            data-aos="fade-left"
+            data-aos-once="true"
+            className="w-full sm:w-1/2  flex flex-col justify-center items-start gap-1"
+          >
             <label htmlFor="city" className="text-xl font-semibold mb-1">
               City
             </label>
@@ -103,7 +123,11 @@ const EditAddress = (): ReactElement => {
           </div>
         </div>
         <div className="flex flex-col sm:flex-row w-full gap-2 ">
-          <div className="w-full sm:w-1/2  flex flex-col justify-center items-start gap-1">
+          <div
+            data-aos="fade-right"
+            data-aos-once="true"
+            className="w-full sm:w-1/2  flex flex-col justify-center items-start gap-1"
+          >
             <label htmlFor="zipCode" className="text-xl font-semibold mb-1">
               Postal Code
             </label>
@@ -118,7 +142,11 @@ const EditAddress = (): ReactElement => {
               onChange={onZipCodeChange}
             />
           </div>
-          <div className="w-full sm:w-1/2  flex flex-col justify-center items-start gap-1">
+          <div
+            data-aos="fade-left"
+            data-aos-once="true"
+            className="w-full sm:w-1/2  flex flex-col justify-center items-start gap-1"
+          >
             {" "}
             <label htmlFor="address" className="text-xl font-semibold mb-1">
               Address
@@ -134,7 +162,11 @@ const EditAddress = (): ReactElement => {
             />
           </div>
         </div>
-        <div className="flex items-center justify-center sm:justify-end w-full gap-2 ">
+        <div
+          data-aos="zoom-in"
+          data-aos-once="true"
+          className="flex items-center justify-center sm:justify-end w-full gap-2 "
+        >
           <button
             disabled={
               !state || !city || !addressPath || !zipCode ? true : false

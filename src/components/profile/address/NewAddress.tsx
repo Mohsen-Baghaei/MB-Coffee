@@ -51,7 +51,11 @@ const NewAddress = (): ReactElement => {
   };
   return (
     <>
-      <div className="flex gap-4 justify-center items-center p-5">
+      <div
+        data-aos="fade-right"
+        data-aos-once="true"
+        className="flex gap-4 justify-center items-center p-5"
+      >
         <Link to="/profile/address">
           <FaArrowLeft className="size-6 cursor-pointer" />
         </Link>
@@ -63,7 +67,11 @@ const NewAddress = (): ReactElement => {
         className="flex flex-col items-center justify-center w-full gap-7 p-5"
       >
         <div className="flex flex-col sm:flex-row w-full gap-2 ">
-          <div className="w-full sm:w-1/2  flex flex-col justify-center items-start gap-1">
+          <div
+            data-aos="fade-right"
+            data-aos-once="true"
+            className="w-full sm:w-1/2  flex flex-col justify-center items-start gap-1"
+          >
             <label htmlFor="state" className="text-xl font-semibold mb-1">
               Province
             </label>
@@ -82,7 +90,11 @@ const NewAddress = (): ReactElement => {
               ))}
             </select>
           </div>
-          <div className="w-full sm:w-1/2  flex flex-col justify-center items-start gap-1">
+          <div
+            data-aos="fade-left"
+            data-aos-once="true"
+            className="w-full sm:w-1/2  flex flex-col justify-center items-start gap-1"
+          >
             <label htmlFor="city" className="text-xl font-semibold mb-1">
               City
             </label>
@@ -99,7 +111,11 @@ const NewAddress = (): ReactElement => {
           </div>
         </div>
         <div className="flex flex-col sm:flex-row w-full gap-2 ">
-          <div className="w-full sm:w-1/2  flex flex-col justify-center items-start gap-1">
+          <div
+            data-aos="fade-right"
+            data-aos-once="true"
+            className="w-full sm:w-1/2  flex flex-col justify-center items-start gap-1"
+          >
             <label htmlFor="zipCode" className="text-xl font-semibold mb-1">
               Postal Code
             </label>
@@ -114,7 +130,11 @@ const NewAddress = (): ReactElement => {
               onChange={onZipCodeChange}
             />
           </div>
-          <div className="w-full sm:w-1/2  flex flex-col justify-center items-start gap-1">
+          <div
+            data-aos="fade-left"
+            data-aos-once="true"
+            className="w-full sm:w-1/2  flex flex-col justify-center items-start gap-1"
+          >
             {" "}
             <label htmlFor="address" className="text-xl font-semibold mb-1">
               Address
@@ -130,7 +150,11 @@ const NewAddress = (): ReactElement => {
             />
           </div>
         </div>
-        <div className="flex items-center justify-center sm:justify-end w-full gap-2 ">
+        <div
+          data-aos="zoom-in"
+          data-aos-once="true"
+          className="flex items-center justify-center sm:justify-end w-full gap-2 "
+        >
           <button
             disabled={
               !state || !city || !addressPath || !zipCode ? true : false
