@@ -63,7 +63,7 @@ export const stateOptions: StateOptionsType[] = [
   { name: "Yazd" },
 ];
 
-type addressType = {
+export type addressType = {
   addressId: number;
   province: string;
   city: string;

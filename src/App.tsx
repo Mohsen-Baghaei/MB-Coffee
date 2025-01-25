@@ -7,6 +7,8 @@ import Layout from "./components/Layout";
 import Home from "./components/elements/Home";
 import Loading from "./components/elements/Loading";
 import Address from "./components/profile/address/Address";
+import NewAddress from "./components/profile/address/NewAddress";
+import EditAddress from "./components/profile/address/EditAddress";
 
 const Products = lazy(() => import("./components/products/Products"));
 const SingleProduct = lazy(() => import("./components/products/SingleProduct"));
@@ -85,15 +87,40 @@ const App = (): ReactElement => {
             </Suspense>
           }
         />
-        <Route path="profile">
-          <Route
-            index
-            element={
-              <Suspense fallback={<Loading />}>
-                <Profile />
-              </Suspense>
-            }
-          />
+        <Route
+          path="profile"
+          element={
+            <Suspense fallback={<Loading />}>
+              <Profile />
+            </Suspense>
+          }
+        >
+          <Route path="address">
+            <Route
+              index
+              element={
+                <Suspense fallback={<Loading />}>
+                  <Address />
+                </Suspense>
+              }
+            />
+            <Route
+              path="new/:userId"
+              element={
+                <Suspense fallback={<Loading />}>
+                  <NewAddress />
+                </Suspense>
+              }
+            />
+            <Route
+              path="edit/:addressId"
+              element={
+                <Suspense fallback={<Loading />}>
+                  <EditAddress />
+                </Suspense>
+              }
+            />
+          </Route>
         </Route>
 
         <Route

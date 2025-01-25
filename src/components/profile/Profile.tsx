@@ -4,6 +4,7 @@ import { FaRegUser } from "react-icons/fa6";
 import { FiShoppingBag } from "react-icons/fi";
 import { MdFavoriteBorder } from "react-icons/md";
 import Address from "./address/Address";
+import { Outlet } from "react-router-dom";
 
 const Profile = (): ReactElement => {
   return (
@@ -39,7 +40,7 @@ const Profile = (): ReactElement => {
         </div>
       </article>
       <article className="hidden lg:flex lg:w-8/12 xl:w-10/12  flex-col items-start justify-start ">
-        <Address />
+        <Outlet />
       </article>
     </section>
   );
