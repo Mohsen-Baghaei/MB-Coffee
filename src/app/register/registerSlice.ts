@@ -1,68 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
-import coffeeregister1 from "../../assets/register/coffeeregister1.png";
-import coffeeregister2 from "../../assets/register/coffeeregister2.png";
-import coffeeregister3 from "../../assets/register/coffeeregister3.png";
-import coffeeregister4 from "../../assets/register/coffeeregister4.png";
-import coffeeregister5 from "../../assets/register/coffeeregister5.png";
-import coffeeregister6 from "../../assets/register/coffeeregister6.png";
-import coffeeregister7 from "../../assets/register/coffeeregister7.png";
-import coffeeregister8 from "../../assets/register/coffeeregister8.png";
-import coffeeregister9 from "../../assets/register/coffeeregister9.png";
-import coffeeregister10 from "../../assets/register/coffeeregister10.png";
-
-export const pictutes = [
-  coffeeregister1,
-  coffeeregister2,
-  coffeeregister3,
-  coffeeregister4,
-  coffeeregister5,
-  coffeeregister6,
-  coffeeregister7,
-  coffeeregister8,
-  coffeeregister9,
-  coffeeregister10,
-];
-
-export type StateOptionsType = {
-  name: string;
-};
-
-export const stateOptions: StateOptionsType[] = [
-  { name: "Azerbaijan sharghi" },
-  { name: "Azerbaijan gharbi" },
-  { name: "Ardabil" },
-  { name: "Isfahan" },
-  { name: "Alborz" },
-  { name: "Ilam" },
-  { name: "Bushehr" },
-  { name: "Tehran" },
-  { name: "Chaharmahal and Bakhtiari" },
-  { name: "Khorasan jonobi" },
-  { name: " Khorasan Razavi" },
-  { name: "Khorasan shomali" },
-  { name: "Khuzestan" },
-  { name: "Zanjan" },
-  { name: "Semnan" },
-  { name: "Sistan and Baluchestan" },
-  { name: "Fars" },
-  { name: "Qazvin" },
-  { name: "Qom" },
-  { name: "Golestan" },
-  { name: "Gilan" },
-  { name: "Lorestan" },
-  { name: "Mazandaran" },
-  { name: "Markazi" },
-  { name: "Hormozgan" },
-  { name: "Hamadan" },
-  { name: "Kurdistan" },
-  { name: "Kerman" },
-  { name: "Kermanshah" },
-  { name: "Kohgiluyeh and Boyer-Ahmad" },
-  { name: "Yazd" },
-];
-
 export type addressType = {
   addressId: number;
   province: string;

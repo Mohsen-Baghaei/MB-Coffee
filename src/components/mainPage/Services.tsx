@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { ServicesData, ServicesDataType } from "../../app/about/aboutSlice";
+import { ServicesData, ServicesDataType } from "../../app/data/data";
 
 const Services = (): ReactElement => {
   const showServicesData = ServicesData.map((service: ServicesDataType) => {

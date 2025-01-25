@@ -1,12 +1,10 @@
 import { ChangeEvent, FormEvent, ReactElement, useState } from "react";
 import {
-  createAddress,
   selectedAddress,
   selectedUsers,
-  stateOptions,
-  StateOptionsType,
   updateAddress,
 } from "../../../app/register/registerSlice";
+import { stateOptions, StateOptionsType } from "../../../app/data/data";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa6";

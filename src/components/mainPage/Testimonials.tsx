@@ -4,7 +4,7 @@ import {
   TestimonialData,
   TestimonialDataType,
   settings,
-} from "../../app/about/aboutSlice";
+} from "../../app/data/data";
 
 const Testimonials = (): ReactElement => {
   const showTestimonialData = TestimonialData.map(

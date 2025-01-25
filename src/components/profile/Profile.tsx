@@ -3,10 +3,21 @@ import { CiLocationOn, CiLogout } from "react-icons/ci";
 import { FaRegUser } from "react-icons/fa6";
 import { FiShoppingBag } from "react-icons/fi";
 import { MdFavoriteBorder } from "react-icons/md";
-import Address from "./address/Address";
-import { Outlet } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Outlet, useNavigate } from "react-router-dom";
+import { logoutUser, selectedUsers } from "../../app/register/registerSlice";
 
 const Profile = (): ReactElement => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const user = useSelector(selectedUsers);
+
+  const handleLogout = () => {
+    dispatch(logoutUser({ id: user?.id! }));
+    navigate("/");
+  };
+
   return (
     <section className="w-full min-h-screen-small sm:min-h-screen-big flex justify-center items-start mx-auto">
       <article className="w-full lg:w-4/12 xl:w-2/12 flex flex-col items-start justify-start p-5">
@@ -34,10 +45,13 @@ const Profile = (): ReactElement => {
           <p className="text-xl font-semibold ">Address</p>
         </div>
 
-        <div className="w-full flex items-center gap-4 border-b-2 border-solid border-gray-400 p-5">
+        <button
+          onClick={handleLogout}
+          className="w-full flex items-center gap-4 border-b-2 border-solid border-gray-400 p-5"
+        >
           <CiLogout className="size-8 " />
           <p className="text-xl font-semibold ">Logout</p>
-        </div>
+        </button>
       </article>
       <article className="hidden lg:flex lg:w-8/12 xl:w-10/12  flex-col items-start justify-start ">
         <Outlet />
