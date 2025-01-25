@@ -6,9 +6,6 @@ import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./components/elements/Home";
 import Loading from "./components/elements/Loading";
-import Address from "./components/profile/address/Address";
-import NewAddress from "./components/profile/address/NewAddress";
-import EditAddress from "./components/profile/address/EditAddress";
 
 const Products = lazy(() => import("./components/products/Products"));
 const SingleProduct = lazy(() => import("./components/products/SingleProduct"));
@@ -18,6 +15,13 @@ const Register = lazy(() => import("./components/register/Register"));
 const Login = lazy(() => import("./components/register/Login"));
 const Missing = lazy(() => import("./components/elements/Missing"));
 const Profile = lazy(() => import("./components/profile/Profile"));
+const Address = lazy(() => import("./components/profile/address/Address"));
+const NewAddress = lazy(
+  () => import("./components/profile/address/NewAddress")
+);
+const EditAddress = lazy(
+  () => import("./components/profile/address/EditAddress")
+);
 
 const App = (): ReactElement => {
   useEffect(() => {
