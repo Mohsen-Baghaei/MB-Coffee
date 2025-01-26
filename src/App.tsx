@@ -22,6 +22,10 @@ const NewAddress = lazy(
 const EditAddress = lazy(
   () => import("./components/profile/address/EditAddress")
 );
+const UserInfo = lazy(() => import("./components/profile/userInfo/UserInfo"));
+const EditUserInfo = lazy(
+  () => import("./components/profile/userInfo/EditUserInfo")
+);
 
 const App = (): ReactElement => {
   useEffect(() => {
@@ -99,6 +103,25 @@ const App = (): ReactElement => {
             </Suspense>
           }
         >
+          <Route path="userinfo">
+            <Route
+              index
+              element={
+                <Suspense fallback={<Loading />}>
+                  <UserInfo />
+                </Suspense>
+              }
+            />
+            <Route
+              path="edit/:userId"
+              element={
+                <Suspense fallback={<Loading />}>
+                  <EditUserInfo />
+                </Suspense>
+              }
+            />
+          </Route>
+
           <Route path="address">
             <Route
               index

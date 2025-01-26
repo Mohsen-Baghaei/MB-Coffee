@@ -39,7 +39,7 @@ const EditUserInfo = (): ReactElement => {
         data-aos-once="true"
         className="flex gap-4 justify-center items-center p-5"
       >
-        <Link to="/profile/address">
+        <Link to="/profile/userinfo">
           <FaArrowLeft className="size-6 cursor-pointer" />
         </Link>
         <p className="text-2xl font-bold">Edit Personal Info</p>
