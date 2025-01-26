@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { logoutUser, selectedUsers } from "../../app/register/registerSlice";
 import UserInfo from "./userInfo/UserInfo";
+import EditUserInfo from "./userInfo/EditUserInfo";
 
 const Profile = (): ReactElement => {
   const dispatch = useDispatch();
@@ -42,7 +43,7 @@ const Profile = (): ReactElement => {
 
         <div className="w-full flex items-center gap-4 border-b-2 border-solid border-gray-400 p-5">
           <FaRegUser className="size-8" />
-          <p className="text-xl font-semibold ">User Info</p>
+          <p className="text-xl font-semibold ">Personal Info</p>
         </div>
 
         <Link
@@ -66,7 +67,7 @@ const Profile = (): ReactElement => {
       </article>
       <article className="hidden lg:flex lg:w-8/12 xl:w-10/12  flex-col items-start justify-start ">
         {/* <Outlet /> */}
-        <UserInfo />
+        <EditUserInfo />
       </article>
     </section>
   );
