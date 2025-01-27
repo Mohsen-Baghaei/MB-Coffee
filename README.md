@@ -2,7 +2,7 @@
 [] add pwa
 [] complete shopping
 [] add profile {
-[] add logout
+[x] add logout
 [] add orderd items
 [] add favorit items
 [x] add addresses

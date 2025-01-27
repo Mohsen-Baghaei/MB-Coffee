@@ -1,14 +1,18 @@
-import { ReactElement } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { ProductType, selectById } from "../../app/products/productsSlice";
 import { RootState } from "../../app/store";
 import { addToBag } from "../../app/inBag/inBagSlice";
+import heart from "../../assets/about/heart.png";
+import heartred from "../../assets/about/heartred.png";
 
 const SingleProduct = (): ReactElement => {
   const { productId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const [favorit, setFavorit] = useState<boolean>(false);
 
   const product = useSelector((state: RootState) =>
     selectById(state, Number(productId!))
@@ -32,14 +36,35 @@ const SingleProduct = (): ReactElement => {
     navigate("/inbag");
   };
 
+  useEffect(() => {
+    if (favorit) {
+    }
+  }, [favorit]);
+
   return (
     <section className="bg-slate-50 w-full">
       <img src={image_url} alt={name} className="size-96 block mx-auto " />
 
       <section className="p-4 max-w-4xl mx-auto">
         <article className="w-full "></article>
-        <p className="text-5xl font-cursive font-bold text-center mb-20">
+        <p className="flex justify-between items-center text-5xl font-cursive font-bold mb-20">
+          <span></span>
           {name}
+          {favorit ? (
+            <img
+              src={heartred}
+              title="dislike"
+              className="size-12 text-black"
+              onClick={() => setFavorit(false)}
+            />
+          ) : (
+            <img
+              src={heart}
+              title="like"
+              className="size-12"
+              onClick={() => setFavorit(true)}
+            />
+          )}
         </p>
         <p className="text-4xl mb-5 px-5 flex justify-between items-center">
           <span className="font-serif text-slate-900 font-bold">Details</span>

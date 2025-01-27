@@ -6,7 +6,6 @@ export type StateType = {
   name: string;
   img: string;
   qty?: number;
-  itemPrice?: string;
   weight: number;
   price: number;
 };

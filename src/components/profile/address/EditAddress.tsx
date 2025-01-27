@@ -91,6 +91,7 @@ const EditAddress = (): ReactElement => {
               id="state"
               name="state"
               required
+              autoComplete="off"
               className="block w-full rounded-md bg-white  text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-400 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-xl/6 p-3"
               value={state}
               onChange={onStateChange}
@@ -115,6 +116,7 @@ const EditAddress = (): ReactElement => {
               id="city"
               name="city"
               required
+              autoComplete="off"
               placeholder="Tehran"
               className="block w-full rounded-md bg-white  text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-400 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-xl/6 p-3"
               value={city}
@@ -136,6 +138,7 @@ const EditAddress = (): ReactElement => {
               id="zipCode"
               name="zipCode"
               required
+              autoComplete="off"
               placeholder="12345"
               className="block w-full rounded-md bg-white  text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-400 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-xl/6 p-3"
               value={zipCode}
@@ -155,6 +158,7 @@ const EditAddress = (): ReactElement => {
               type="text"
               id="address"
               name="address"
+              autoComplete="off"
               required
               className="block w-full rounded-md bg-white  text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-400 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-xl/6 p-3"
               value={addressPath}

@@ -93,6 +93,7 @@ const EditUserInfo = (): ReactElement => {
               type="text"
               id="firstname"
               name="firstname"
+              autoComplete="off"
               required
               placeholder="Mohsen"
               className="block w-full rounded-md bg-white  text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-400 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-xl/6 p-3"
@@ -112,6 +113,7 @@ const EditUserInfo = (): ReactElement => {
               type="text"
               id="lastname"
               name="lastname"
+              autoComplete="off"
               required
               placeholder="Baghaei"
               className="block w-full rounded-md bg-white  text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-400 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-xl/6 p-3"
@@ -133,6 +135,7 @@ const EditUserInfo = (): ReactElement => {
               type="email"
               id="email"
               name="email"
+              autoComplete="off"
               required
               placeholder="MBCoffee@gmail.com"
               className="block w-full rounded-md bg-white  text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-400 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-xl/6 p-3"
@@ -153,6 +156,7 @@ const EditUserInfo = (): ReactElement => {
               type="tel"
               id="telephone"
               name="telephone"
+              autoComplete="off"
               min={11}
               max={12}
               placeholder="989 012 345 678"
@@ -177,6 +181,7 @@ const EditUserInfo = (): ReactElement => {
               type="date"
               id="birthday"
               name="birthday"
+              autoComplete="off"
               className="block w-full rounded-md bg-white  text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-400 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-xl/6 p-3"
               value={birthday}
               onChange={onBirthdayChange}
@@ -195,6 +200,7 @@ const EditUserInfo = (): ReactElement => {
               type="tel"
               id="job"
               name="job"
+              autoComplete="off"
               className="block w-full rounded-md bg-white  text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-400 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-xl/6 p-3"
               value={job}
               onChange={onJobChange}
