@@ -29,21 +29,16 @@ const SingleProduct = (): ReactElement => {
     selectById(state, Number(productId!))
   ) as ProductType | undefined;
 
-  const {
-    id,
-    description,
-    flavor_profile,
-    grind_option,
-    image_url,
-    name,
-    price,
-    region,
-    roast_level,
-    weight,
-  } = product!;
-
   const handleAdd = () => {
-    dispatch(addToBag({ id, name, img: image_url, weight, price }));
+    dispatch(
+      addToBag({
+        id: product?.id!,
+        name: product?.name!,
+        img: product?.image_url!,
+        weight: product?.weight!,
+        price: product?.price!,
+      })
+    );
     navigate("/inbag");
   };
 
@@ -77,13 +72,17 @@ const SingleProduct = (): ReactElement => {
 
   return (
     <section className="bg-slate-50 w-full">
-      <img src={image_url} alt={name} className="size-96 block mx-auto " />
+      <img
+        src={product?.image_url}
+        alt={product?.name}
+        className="size-96 block mx-auto "
+      />
 
       <section className="p-4 max-w-4xl mx-auto">
         <article className="w-full "></article>
         <p className="flex justify-between items-center text-5xl font-cursive font-bold mb-20">
           <span></span>
-          {name}
+          {product?.name}
           {inFavorit ? (
             <img
               src={heartred}
@@ -107,22 +106,22 @@ const SingleProduct = (): ReactElement => {
             {new Intl.NumberFormat("en-Us", {
               style: "currency",
               currency: "USD",
-            }).format(Number(price))}
+            }).format(Number(product?.price))}
           </span>
         </p>
         <article className="w-full p-4 bg-slate-700 rounded-2xl mb-5">
-          <p className="text-slate-50 text-xl p-1">{description}</p>
+          <p className="text-slate-50 text-xl p-1">{product?.description}</p>
         </article>
         <article className="w-full p-4 bg-slate-700 rounded-2xl mb-5">
           <p className="text-slate-50 text-xl flex flex-wrap items-center gap-2">
             <span className="text-2xl font-bold">Region :</span>{" "}
-            <span className="text-slate-200">{region}</span>
+            <span className="text-slate-200">{product?.region}</span>
           </p>
         </article>
         <article className="w-full p-4 bg-slate-700 rounded-2xl mb-5">
           <p className="text-slate-50 text-xl flex flex-wrap items-center gap-2">
             <span className="text-2xl font-bold">Flavor :</span>{" "}
-            {flavor_profile.map((flavor, i) => (
+            {product?.flavor_profile.map((flavor, i) => (
               <span className="text-slate-200" key={i}>
                 {flavor}
               </span>
@@ -132,7 +131,7 @@ const SingleProduct = (): ReactElement => {
         <article className="w-full p-4 bg-slate-700 rounded-2xl mb-5">
           <p className="text-slate-50 text-xl flex flex-wrap items-center gap-2">
             <span className="text-2xl font-bold">Grind :</span>{" "}
-            {grind_option.map((grind, i) => (
+            {product?.grind_option.map((grind, i) => (
               <span className="text-slate-200" key={i}>
                 {grind}
               </span>
@@ -143,13 +142,13 @@ const SingleProduct = (): ReactElement => {
         <article className="w-full p-4 bg-slate-700 rounded-2xl mb-5">
           <p className="text-slate-50 text-xl flex flex-wrap items-center gap-2">
             <span className="text-2xl font-bold">Roast Level :</span>{" "}
-            <span className="text-slate-200">{roast_level}</span>
+            <span className="text-slate-200">{product?.roast_level}</span>
           </p>
         </article>
         <article className="w-full p-4 bg-slate-700 rounded-2xl mb-5">
           <p className="text-slate-50 text-xl flex flex-wrap items-center gap-2">
             <span className="text-2xl font-bold">Weight :</span>{" "}
-            <span className="text-slate-200">{weight} g</span>
+            <span className="text-slate-200">{product?.weight} g</span>
           </p>
         </article>
         <button
