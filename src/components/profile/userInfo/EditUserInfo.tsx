@@ -1,14 +1,32 @@
 import { ChangeEvent, FormEvent, ReactElement, useState } from "react";
 import { FaArrowLeft } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  selectedUsers,
+  userInfoEdit,
+} from "../../../app/register/registerSlice";
 
 const EditUserInfo = (): ReactElement => {
-  const [firstname, SetFirstname] = useState<string>("");
-  const [lastname, setLastname] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [phoneNumber, setPhoneNumber] = useState<string>("");
-  const [birthday, setBirthday] = useState<string>("");
-  const [job, setJob] = useState<string>("");
+  const user = useSelector(selectedUsers);
+
+  const [firstname, SetFirstname] = useState<string>(
+    user?.userInfo.firstname ?? ""
+  );
+  const [lastname, setLastname] = useState<string>(
+    user?.userInfo.lastname ?? ""
+  );
+  const [email, setEmail] = useState<string>(user?.userInfo.email ?? "");
+  const [phoneNumber, setPhoneNumber] = useState<string>(
+    user?.userInfo.phoneNumber?.toString() ?? ""
+  );
+  const [birthday, setBirthday] = useState<string>(
+    user?.userInfo.birthday ?? ""
+  );
+  const [job, setJob] = useState<string>(user?.userInfo.job ?? "");
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onFirstnameChange = (e: ChangeEvent<HTMLInputElement>) =>
     SetFirstname(e.target.value);
@@ -30,6 +48,18 @@ const EditUserInfo = (): ReactElement => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    dispatch(
+      userInfoEdit({
+        id: Number(user?.id),
+        firstname,
+        lastname,
+        email,
+        phoneNumber: Number(phoneNumber),
+        birthday,
+        job,
+      })
+    );
+    navigate("/profile/userinfo");
   };
 
   return (
@@ -37,18 +67,20 @@ const EditUserInfo = (): ReactElement => {
       <div
         data-aos="fade-right"
         data-aos-once="true"
-        className="flex gap-4 justify-center items-center p-5"
+        className="flex gap-4 justify-start items-center p-5"
       >
         <Link to="/profile/userinfo">
           <FaArrowLeft className="size-6 cursor-pointer" />
         </Link>
-        <p className="text-2xl font-bold">Edit Personal Info</p>
+        <p className="text-xl sm:text-2xl font-semibold sm:font-bold">
+          Edit Personal Info
+        </p>
       </div>
       <form
         onSubmit={handleSubmit}
         className="flex flex-col items-center justify-center w-full gap-7 p-5"
       >
-        <div className="flex flex-col sm:flex-row w-full gap-2 ">
+        <div className="flex flex-col sm:flex-row w-full gap-2">
           <div
             data-aos="fade-right"
             data-aos-once="true"
@@ -101,8 +133,6 @@ const EditUserInfo = (): ReactElement => {
               type="email"
               id="email"
               name="email"
-              pattern=".+@example\.com"
-              size={30}
               required
               placeholder="MBCoffee@gmail.com"
               className="block w-full rounded-md bg-white  text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-400 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-xl/6 p-3"
@@ -123,7 +153,6 @@ const EditUserInfo = (): ReactElement => {
               type="tel"
               id="telephone"
               name="telephone"
-              pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}-[0-9]{3}"
               min={11}
               max={12}
               placeholder="989 012 345 678"
@@ -184,7 +213,7 @@ const EditUserInfo = (): ReactElement => {
             type="submit"
             className="w-full flex justify-center items-center gap-1 tracking-wider font-semibold bg-secondary/70 text-gray-100 py-4 rounded-lg hover:bg-secondary transition-all duration-300 ease-in-out focus:shadow-outline focus:outline-none disabled:bg-secondary/40"
           >
-            Add Address
+            Edit
           </button>
         </div>
       </form>

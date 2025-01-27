@@ -64,12 +64,14 @@ const EditAddress = (): ReactElement => {
       <div
         data-aos="fade-right"
         data-aos-once="true"
-        className="flex gap-4 justify-center items-center p-5"
+        className="flex gap-4 justify-start items-center p-5"
       >
         <Link to="/profile/address">
           <FaArrowLeft className="size-6 cursor-pointer" />
         </Link>
-        <p className="text-2xl font-bold">Edit Address</p>
+        <p className="text-xl sm:text-2xl font-semibold sm:font-bold">
+          Edit Address
+        </p>
       </div>
 
       <form
@@ -172,7 +174,7 @@ const EditAddress = (): ReactElement => {
             type="submit"
             className="w-full flex justify-center items-center gap-1 tracking-wider font-semibold bg-secondary/70 text-gray-100 py-4 rounded-lg hover:bg-secondary transition-all duration-300 ease-in-out focus:shadow-outline focus:outline-none disabled:bg-secondary/40"
           >
-            Edit Address
+            Edit
           </button>
         </div>
       </form>

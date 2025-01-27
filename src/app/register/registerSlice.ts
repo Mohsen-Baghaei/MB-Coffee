@@ -9,7 +9,14 @@ export type addressType = {
   postalCode: string;
 };
 
-export type userinfo = {};
+export type userInfoType = {
+  firstname: string;
+  lastname: string;
+  email: string;
+  phoneNumber: number | null;
+  birthday?: string;
+  job?: string;
+};
 
 export type usersType = {
   user: string;
@@ -17,6 +24,7 @@ export type usersType = {
   id: number;
   loggedIn: boolean;
   userAddress: addressType[];
+  userInfo: userInfoType;
 };
 
 export type UserStateType = {
@@ -45,12 +53,20 @@ const registerSlice = createSlice({
         ? state.users[state.users.length - 1].id + 1
         : 1;
       const userAddress: addressType[] = [];
+      const userInfo: userInfoType = {
+        firstname: "",
+        lastname: "",
+        phoneNumber: null,
+        email: "",
+        birthday: "",
+        job: "",
+      };
       const duplicate = state.users.find((username) => username.user === user);
       if (duplicate) {
         state.error = "Username Taken";
       } else {
         const loggedIn = false;
-        state.users.push({ id, user, pwd, loggedIn, userAddress });
+        state.users.push({ id, user, pwd, loggedIn, userAddress, userInfo });
         localStorage.setItem("user", JSON.stringify(state.users));
         state.error = "";
       }
@@ -83,6 +99,33 @@ const registerSlice = createSlice({
         existUser.loggedIn = false;
         localStorage.setItem("user", JSON.stringify(state.users));
         state.error = "";
+      }
+    },
+    userInfoEdit(
+      state: UserStateType,
+      action: PayloadAction<{
+        id: number;
+        firstname: string;
+        lastname: string;
+        email: string;
+        phoneNumber: number;
+        birthday?: string;
+        job?: string;
+      }>
+    ) {
+      const { id, firstname, lastname, email, phoneNumber, birthday, job } =
+        action.payload;
+      const existUser = state.users.find((username) => username.id === id);
+      if (existUser) {
+        existUser.userInfo = {
+          firstname,
+          lastname,
+          email,
+          phoneNumber,
+          birthday,
+          job,
+        };
+        localStorage.setItem("user", JSON.stringify(state.users));
       }
     },
     createAddress(
@@ -168,6 +211,7 @@ export const {
   createUser,
   authorizUser,
   logoutUser,
+  userInfoEdit,
   createAddress,
   updateAddress,
   deleteAddress,

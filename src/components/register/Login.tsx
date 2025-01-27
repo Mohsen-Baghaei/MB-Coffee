@@ -11,10 +11,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   usersError,
-  pictutes,
   authorizUser,
   selectedUsers,
 } from "../../app/register/registerSlice";
+
+import { pictutes } from "../../app/data/data";
 
 const pictute = Math.floor(Math.random() * 10);
 

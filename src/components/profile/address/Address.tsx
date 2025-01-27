@@ -41,7 +41,7 @@ const Address = (): ReactElement => {
             <SingleAddress
               key={address.addressId}
               address={address}
-              userId={user.id}
+              user={user}
             />
           ))
         ) : (

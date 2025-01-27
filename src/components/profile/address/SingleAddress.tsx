@@ -2,6 +2,7 @@ import { ReactElement } from "react";
 import {
   addressType,
   deleteAddress,
+  usersType,
 } from "../../../app/register/registerSlice";
 import { GiMailbox } from "react-icons/gi";
 import { FaLocationArrow, FaMapLocation, FaUser } from "react-icons/fa6";
@@ -13,17 +14,20 @@ import { GrLocationPin } from "react-icons/gr";
 
 type PropType = {
   address: addressType;
-  userId: number;
+  user: usersType;
 };
 
-const SingleAddress = ({ address, userId }: PropType): ReactElement => {
-  const showAddress = `${address.province} / ${address.city} / ${address.location}`;
-
+const SingleAddress = ({ address, user }: PropType): ReactElement => {
   const dispatch = useDispatch();
 
   const handleDeleteAddress = () => {
-    dispatch(deleteAddress({ id: userId, addressId: address.addressId }));
+    dispatch(deleteAddress({ id: user.id, addressId: address.addressId }));
   };
+
+  const showName =
+    user?.userInfo.firstname && user?.userInfo.lastname
+      ? `${user.userInfo.firstname} ${user.userInfo.lastname}`
+      : "Name";
 
   return (
     <article
@@ -48,14 +52,18 @@ const SingleAddress = ({ address, userId }: PropType): ReactElement => {
           <GiMailbox className="size-6 text-gray-400" />
           {address.postalCode}
         </p>
-        <p className="flex justify-start items-center gap-2 text-lg sm:text-xl p-2">
-          <MdPhoneIphone className="size-6 text-gray-400" />
-          phone number remove if it dose not exsit
-        </p>
-        <p className="flex justify-start items-center gap-2 text-lg sm:text-xl p-2">
-          <FaUser className="size-6 text-gray-400" />
-          name and last name
-        </p>
+        {user?.userInfo?.phoneNumber ? (
+          <p className="flex justify-start items-center gap-2 text-lg sm:text-xl p-2">
+            <MdPhoneIphone className="size-6 text-gray-400" />
+            {user.userInfo.phoneNumber}
+          </p>
+        ) : null}
+        {showName ? (
+          <p className="flex justify-start items-center gap-2 text-lg sm:text-xl p-2">
+            <FaUser className="size-6 text-gray-400" />
+            {showName}
+          </p>
+        ) : null}
       </div>
       <div className="w-1/12 flex flex-col justify-start items-end gap-2 sm:gap-4">
         <Link

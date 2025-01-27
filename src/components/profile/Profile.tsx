@@ -6,8 +6,6 @@ import { MdFavoriteBorder } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { logoutUser, selectedUsers } from "../../app/register/registerSlice";
-import UserInfo from "./userInfo/UserInfo";
-import EditUserInfo from "./userInfo/EditUserInfo";
 
 const Profile = (): ReactElement => {
   const dispatch = useDispatch();
@@ -41,9 +39,19 @@ const Profile = (): ReactElement => {
           <p className="text-xl font-semibold ">Favorite Coffees</p>
         </div>
 
-        <div className="w-full flex items-center gap-4 border-b-2 border-solid border-gray-400 p-5">
+        <Link
+          to="/profile/userinfo"
+          className="w-full flex items-center gap-4 border-b-2 border-solid border-gray-400 p-5"
+        >
           <FaRegUser className="size-8" />
           <p className="text-xl font-semibold ">Personal Info</p>
+        </Link>
+        <div
+          className={
+            splitedPath[2] === "userinfo" ? "block lg:hidden w-full" : "hidden"
+          }
+        >
+          <Outlet />
         </div>
 
         <Link
@@ -55,7 +63,7 @@ const Profile = (): ReactElement => {
         </Link>
         <div
           className={
-            splitedPath[2] === "address" ? "lg:hidden w-full" : "block"
+            splitedPath[2] === "address" ? "block lg:hidden w-full" : "hidden"
           }
         >
           <Outlet />
@@ -70,8 +78,7 @@ const Profile = (): ReactElement => {
         </button>
       </article>
       <article className="hidden lg:flex lg:w-8/12 xl:w-10/12  flex-col items-start justify-start ">
-        {/* <Outlet /> */}
-        <EditUserInfo />
+        <Outlet />
       </article>
     </section>
   );

@@ -13,8 +13,9 @@ import { RiInformation2Fill } from "react-icons/ri";
 import {
   createUser,
   usersError,
-  pictutes,
 } from "../../app/register/registerSlice";
+
+import {pictutes} from '../../app/data/data'
 
 const USER_REGEX: RegExp = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX: RegExp =

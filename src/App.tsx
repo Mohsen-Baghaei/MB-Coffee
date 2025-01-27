@@ -113,7 +113,7 @@ const App = (): ReactElement => {
               }
             />
             <Route
-              path="edit/:userId"
+              path="edit"
               element={
                 <Suspense fallback={<Loading />}>
                   <EditUserInfo />
