@@ -11,7 +11,7 @@ import coffeecup from "../../assets/menu/coffeecup.png";
 import barista from "../../assets/menu/barista.png";
 
 const Sidebar = (): ReactElement => {
-  const SidebarStatus = useSelector(sidebarStatus);
+  const SidebarStatus: boolean = useSelector(sidebarStatus);
 
   const navigate = useNavigate();
 

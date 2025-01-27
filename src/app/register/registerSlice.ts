@@ -9,6 +9,8 @@ export type addressType = {
   postalCode: string;
 };
 
+export type userinfo = {};
+
 export type usersType = {
   user: string;
   pwd: string;

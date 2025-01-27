@@ -9,13 +9,13 @@ import coffeemenuimg from "../../assets/menu/coffeemenuimg.png";
 const Header = (): ReactElement => {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
-  const SidebarStatus = useSelector(sidebarStatus);
+  const SidebarStatus: boolean = useSelector(sidebarStatus);
 
   useEffect(() => {
     scrollTo();
   }, [pathname]);
 
-  const scrollTo = () => {
+  const scrollTo = (): void => {
     setTimeout(() => {
       window.scrollTo(0, 0);
     }, 500);

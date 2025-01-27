@@ -53,7 +53,11 @@ const Profile = (): ReactElement => {
           <CiLocationOn className="size-8" />
           <p className="text-xl font-semibold ">Address</p>
         </Link>
-        <div className={splitedPath[2] === "address" ? "lg:hidden" : "block"}>
+        <div
+          className={
+            splitedPath[2] === "address" ? "lg:hidden w-full" : "block"
+          }
+        >
           <Outlet />
         </div>
 
