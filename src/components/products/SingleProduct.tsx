@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { ProductType, selectById } from "../../app/products/productsSlice";
@@ -6,13 +6,24 @@ import { RootState } from "../../app/store";
 import { addToBag } from "../../app/inBag/inBagSlice";
 import heart from "../../assets/about/heart.png";
 import heartred from "../../assets/about/heartred.png";
+import {
+  addFavoritCoffee,
+  removeFavoritCoffee,
+  selectedUsers,
+} from "../../app/register/registerSlice";
 
 const SingleProduct = (): ReactElement => {
   const { productId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [favorit, setFavorit] = useState<boolean>(false);
+  const user = useSelector(selectedUsers);
+
+  const inFavorit: boolean = user?.favoritCoffee?.find(
+    (coffee) => coffee?.productId === Number(productId)
+  )
+    ? true
+    : false;
 
   const product = useSelector((state: RootState) =>
     selectById(state, Number(productId!))
@@ -36,10 +47,33 @@ const SingleProduct = (): ReactElement => {
     navigate("/inbag");
   };
 
-  useEffect(() => {
-    if (favorit) {
+  const handleAddFavorit = () => {
+    if (user) {
+      dispatch(
+        addFavoritCoffee({
+          id: user.id,
+          productId: product?.id!,
+          name: product?.name!,
+          price: product?.price!,
+        })
+      );
+    } else {
+      navigate("/register");
     }
-  }, [favorit]);
+  };
+
+  const handleRemoveFavort = () => {
+    if (user) {
+      dispatch(
+        removeFavoritCoffee({
+          id: user.id,
+          productId: product?.id!,
+        })
+      );
+    } else {
+      navigate("/register");
+    }
+  };
 
   return (
     <section className="bg-slate-50 w-full">
@@ -50,19 +84,19 @@ const SingleProduct = (): ReactElement => {
         <p className="flex justify-between items-center text-5xl font-cursive font-bold mb-20">
           <span></span>
           {name}
-          {favorit ? (
+          {inFavorit ? (
             <img
               src={heartred}
               title="dislike"
-              className="size-12 text-black"
-              onClick={() => setFavorit(false)}
+              className="size-12 cursor-pointer"
+              onClick={handleRemoveFavort}
             />
           ) : (
             <img
               src={heart}
               title="like"
-              className="size-12"
-              onClick={() => setFavorit(true)}
+              className="size-12 cursor-pointer"
+              onClick={handleAddFavorit}
             />
           )}
         </p>

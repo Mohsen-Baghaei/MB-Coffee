@@ -9,6 +9,12 @@ export type addressType = {
   postalCode: string;
 };
 
+export type favoritCoffeeType = {
+  productId: number;
+  name: string;
+  price: number;
+};
+
 export type userInfoType = {
   firstname: string;
   lastname: string;
@@ -25,6 +31,7 @@ export type usersType = {
   loggedIn: boolean;
   userAddress: addressType[];
   userInfo: userInfoType;
+  favoritCoffee: favoritCoffeeType[];
 };
 
 export type UserStateType = {
@@ -61,12 +68,21 @@ const registerSlice = createSlice({
         birthday: "",
         job: "",
       };
+      const favoritCoffee: favoritCoffeeType[] = [];
       const duplicate = state.users.find((username) => username.user === user);
       if (duplicate) {
         state.error = "Username Taken";
       } else {
         const loggedIn = false;
-        state.users.push({ id, user, pwd, loggedIn, userAddress, userInfo });
+        state.users.push({
+          id,
+          user,
+          pwd,
+          loggedIn,
+          userAddress,
+          userInfo,
+          favoritCoffee,
+        });
         localStorage.setItem("user", JSON.stringify(state.users));
         state.error = "";
       }
@@ -125,6 +141,43 @@ const registerSlice = createSlice({
           birthday,
           job,
         };
+        localStorage.setItem("user", JSON.stringify(state.users));
+      }
+    },
+    addFavoritCoffee(
+      state: UserStateType,
+      action: PayloadAction<{
+        id: number;
+        productId: number;
+        name: string;
+        price: number;
+      }>
+    ) {
+      const { id, productId, name, price } = action.payload;
+
+      const existUser = state.users.find((username) => username.id === id);
+
+      if (existUser) {
+        existUser.favoritCoffee.push({ productId, name, price });
+        localStorage.setItem("user", JSON.stringify(state.users));
+      }
+    },
+    removeFavoritCoffee(
+      state: UserStateType,
+      action: PayloadAction<{
+        id: number;
+        productId: number;
+      }>
+    ) {
+      const { id, productId } = action.payload;
+
+      const existUser = state.users.find((username) => username.id === id);
+
+      if (existUser) {
+        const filteredFavoritCoffee = existUser.favoritCoffee.filter(
+          (coffee) => coffee.productId !== productId
+        );
+        existUser.favoritCoffee = filteredFavoritCoffee;
         localStorage.setItem("user", JSON.stringify(state.users));
       }
     },
@@ -215,6 +268,8 @@ export const {
   createAddress,
   updateAddress,
   deleteAddress,
+  addFavoritCoffee,
+  removeFavoritCoffee,
 } = registerSlice.actions;
 
 export const selectedUsers = (state: RootState) =>
