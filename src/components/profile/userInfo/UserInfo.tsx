@@ -29,7 +29,7 @@ const UserInfo = (): ReactElement => {
         </div>
       </div>
       <section className="flex flex-col w-full justify-start items-center">
-        <article className="w-full flex flex-col sm:flex-row justify-between items-center gap-2">
+        <article className="w-full flex flex-col sm:flex-row justify-between items-center gap-1">
           <p
             data-aos="fade-right"
             data-aos-once="true"
@@ -42,7 +42,7 @@ const UserInfo = (): ReactElement => {
             data-aos-once="true"
             className="text-center w-full sm:w-1/2 p-3 rounded-xl border-2 border-solid border-gray-500 text-lg sm:text-xl line-clamp-1 mt-5"
           >
-            {user?.userInfo.email ?? "Email"}
+            {user?.userInfo.email ? user?.userInfo.email : "Email"}
           </p>
         </article>
         <article className="w-full flex flex-col sm:flex-row justify-between items-start gap-1">
@@ -51,14 +51,18 @@ const UserInfo = (): ReactElement => {
             data-aos-once="true"
             className="text-center w-full sm:w-1/2 p-3 rounded-xl border-2 border-solid border-gray-500 text-lg sm:text-xl line-clamp-1 mt-5"
           >
-            {user?.userInfo.phoneNumber ?? "Phone Number"}
+            {user?.userInfo.phoneNumber
+              ? user?.userInfo.phoneNumber
+              : "Phone Number"}
           </p>
           <p
             data-aos="fade-left"
             data-aos-once="true"
             className="text-center w-full sm:w-1/2 p-3 rounded-xl border-2 border-solid border-gray-500 text-lg sm:text-xl line-clamp-1 mt-5"
           >
-            {user?.userInfo.birthday ?? "Birthday Date"}
+            {user?.userInfo.birthday
+              ? user?.userInfo.birthday
+              : "Birthday Date"}
           </p>
         </article>
         <article className="w-full flex flex-col sm:flex-row justify-between items-start gap-1">
@@ -67,7 +71,7 @@ const UserInfo = (): ReactElement => {
             data-aos-once="true"
             className="text-center w-full sm:w-1/2 p-3 rounded-xl border-2 border-solid border-gray-500 text-lg sm:text-xl line-clamp-1 mt-5"
           >
-            {user?.userInfo.job ?? "Job"}
+            {user?.userInfo.job ? user?.userInfo.job : "Job"}
           </p>
           <Link
             data-aos="fade-left"

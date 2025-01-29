@@ -27,7 +27,9 @@ const Profile = (): ReactElement => {
       <article className="w-full lg:w-4/12 xl:w-2/12 flex flex-col items-start justify-start p-5">
         <div className="w-full flex items-center gap-4 border-b-2 border-solid border-gray-400 p-5">
           <img src="" alt="" className="size-8" />
-          <p className="text-xl font-semibold ">Hey Mohsen</p>
+          <p className="text-xl font-semibold ">
+            Hey {user?.userInfo.firstname ?? user?.user}
+          </p>
         </div>
         <div className="w-full flex items-center gap-4 border-b-2 border-solid border-gray-400 p-5">
           <FiShoppingBag className="size-8" />
