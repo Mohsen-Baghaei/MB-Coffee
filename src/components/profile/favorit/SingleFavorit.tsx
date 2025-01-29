@@ -47,7 +47,7 @@ const SingleFavorit = ({ coffee, userId }: PropType): ReactElement => {
     <article
       data-aos="zoom-in"
       data-aos-once="true"
-      className="bg-primary/40 rounded-lg w-full"
+      className="bg-primary/20 rounded-xl w-full"
     >
       <img
         src={coffee.img}
@@ -58,8 +58,12 @@ const SingleFavorit = ({ coffee, userId }: PropType): ReactElement => {
         <p className="flex justify-center items-center flex-nowrap w-full p-1 mx-auto text-xl sm:text-2xl ">
           {coffee.name}
         </p>
+        <p className="flex justify-between items-center text-xl sm:text-2xl p-2 px-4">
+          <span>{coffee.weight} g</span>
+          <span>{price}</span>
+        </p>
       </Link>
-      <div className="flex justify-between items-center flex-nowrap w-full p-2 pr-4 mx-auto text-xl sm:text-2xl gap-2 mb-2">
+      <div className="flex justify-between items-center flex-nowrap w-full p-2 mx-auto text-xl sm:text-2xl gap-2 mb-2">
         <button
           onClick={handleAdd}
           className="flex w-10/12 justify-center items-center gap-2 p-2 border border-solid border-primary/80 hover:border-primary rounded-xl text-lg text-gray-800"

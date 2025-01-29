@@ -19,7 +19,7 @@ const Favorit = (): ReactElement => {
           <FaArrowLeft className="size-6 cursor-pointer" />
         </Link>
         <p className="text-xl sm:text-2xl font-semibold sm:font-bold">
-          Favorite
+          Favorite Coffees
         </p>
       </div>
       <section className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-12 md:gap-6 place-content-center w-full">

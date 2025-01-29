@@ -23,7 +23,7 @@ const Profile = (): ReactElement => {
   };
 
   return (
-    <section className="w-full min-h-screen-small sm:min-h-screen-big flex justify-center items-start mx-auto">
+    <section className="w-full min-h-screen-small sm:min-h-screen-big flex justify-center items-start mx-auto bg-white">
       <article className="w-full lg:w-4/12 xl:w-2/12 flex flex-col items-start justify-start p-5">
         <div className="w-full flex items-center gap-4 border-b-2 border-solid border-gray-400 p-5">
           <img src="" alt="" className="size-8" />
@@ -34,9 +34,19 @@ const Profile = (): ReactElement => {
           <p className="text-xl font-semibold ">Orders</p>
         </div>
 
-        <div className="w-full flex items-center gap-4 border-b-2 border-solid border-gray-400 p-5">
+        <Link
+          to="/profile/favorit"
+          className="w-full flex items-center gap-4 border-b-2 border-solid border-gray-400 p-5"
+        >
           <MdFavoriteBorder className="size-8" />
           <p className="text-xl font-semibold ">Favorite Coffees</p>
+        </Link>
+        <div
+          className={
+            splitedPath[2] === "favorit" ? "block lg:hidden w-full" : "hidden"
+          }
+        >
+          <Outlet />
         </div>
 
         <Link
