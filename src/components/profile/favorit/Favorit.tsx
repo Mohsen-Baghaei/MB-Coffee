@@ -4,7 +4,7 @@ import { selectedUsers } from "../../../app/register/registerSlice";
 import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa6";
 import SingleFavorit from "./SingleFavorit";
-import empty from "../../../assets/about/empty.png";
+import empty from "../../../assets/profile/empty.png";
 
 const Favorit = (): ReactElement => {
   const user = useSelector(selectedUsers);
@@ -34,7 +34,10 @@ const Favorit = (): ReactElement => {
           ))}
         </section>
       ) : (
-        <div className="flex flex-col w-full justify-center items-center gap-6 my-7">
+        <div
+          data-aos="zoom-in"
+          className="flex flex-col w-full justify-center items-center gap-6 my-7"
+        >
           <p className="text-xl font-semibold">
             There is No Favorit Coffee to Show
           </p>

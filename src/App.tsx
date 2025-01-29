@@ -27,6 +27,7 @@ const EditUserInfo = lazy(
   () => import("./components/profile/userInfo/EditUserInfo")
 );
 const Favorit = lazy(() => import("./components/profile/favorit/Favorit"));
+const Orders = lazy(() => import("./components/profile/order/Orders"));
 
 const App = (): ReactElement => {
   useEffect(() => {
@@ -104,6 +105,14 @@ const App = (): ReactElement => {
             </Suspense>
           }
         >
+          <Route
+            path="orders"
+            element={
+              <Suspense fallback={<Loading />}>
+                <Orders />
+              </Suspense>
+            }
+          />
           <Route
             path="favorit"
             element={

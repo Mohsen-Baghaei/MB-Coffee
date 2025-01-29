@@ -7,7 +7,7 @@ import {
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import SingleAddress from "./SingleAddress";
-import empty from "../../../assets/about/empty.png";
+import empty from "../../../assets/profile/empty.png";
 
 const Address = (): ReactElement => {
   const user = useSelector(selectedUsers);
@@ -46,7 +46,10 @@ const Address = (): ReactElement => {
             />
           ))
         ) : (
-          <div className="flex flex-col w-full justify-center items-center gap-6 my-7">
+          <div
+            data-aos="zoom-in"
+            className="flex flex-col w-full justify-center items-center gap-6 my-7"
+          >
             <p className="text-xl font-semibold">There is No Address to Show</p>
             <img src={empty} alt="empty" className="size-40" />
           </div>

@@ -10,4 +10,5 @@
 [] add avatar and name to user
 }
 [] if some one is logged in you can not register or login again
-[] add pop up message for adding to the bag 
+[] add pop up message for adding to the bag
+[] protacted route
