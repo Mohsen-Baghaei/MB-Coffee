@@ -12,6 +12,8 @@ export type addressType = {
 export type favoritCoffeeType = {
   productId: number;
   name: string;
+  img: string;
+  weight: number;
   price: number;
 };
 
@@ -150,15 +152,17 @@ const registerSlice = createSlice({
         id: number;
         productId: number;
         name: string;
+        img: string;
+        weight: number;
         price: number;
       }>
     ) {
-      const { id, productId, name, price } = action.payload;
+      const { id, productId, name, price, img, weight } = action.payload;
 
       const existUser = state.users.find((username) => username.id === id);
 
       if (existUser) {
-        existUser.favoritCoffee.push({ productId, name, price });
+        existUser.favoritCoffee.push({ productId, name, price, img, weight });
         localStorage.setItem("user", JSON.stringify(state.users));
       }
     },

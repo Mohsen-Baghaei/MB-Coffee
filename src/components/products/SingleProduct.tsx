@@ -49,7 +49,9 @@ const SingleProduct = (): ReactElement => {
           id: user.id,
           productId: product?.id!,
           name: product?.name!,
+          img: product?.image_url!,
           price: product?.price!,
+          weight: product?.weight!,
         })
       );
     } else {

@@ -26,6 +26,7 @@ const UserInfo = lazy(() => import("./components/profile/userInfo/UserInfo"));
 const EditUserInfo = lazy(
   () => import("./components/profile/userInfo/EditUserInfo")
 );
+const Favorit = lazy(() => import("./components/profile/favorit/Favorit"));
 
 const App = (): ReactElement => {
   useEffect(() => {
@@ -103,6 +104,14 @@ const App = (): ReactElement => {
             </Suspense>
           }
         >
+          <Route
+            path="favorit"
+            element={
+              <Suspense fallback={<Loading />}>
+                <Favorit />
+              </Suspense>
+            }
+          />
           <Route path="userinfo">
             <Route
               index
