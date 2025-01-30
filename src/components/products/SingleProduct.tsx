@@ -1,5 +1,5 @@
-import { ReactElement, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { ReactElement } from "react";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { ProductType, selectById } from "../../app/products/productsSlice";
 import { RootState } from "../../app/store";
@@ -11,11 +11,11 @@ import {
   removeFavoritCoffee,
   selectedUsers,
 } from "../../app/register/registerSlice";
+import { ToastContainer, toast } from "react-toastify";
 
 const SingleProduct = (): ReactElement => {
   const { productId } = useParams();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const user = useSelector(selectedUsers);
 
@@ -25,11 +25,18 @@ const SingleProduct = (): ReactElement => {
     ? true
     : false;
 
+  const notifyError = (errMsg: string) => toast.error(errMsg);
+
+  const notifySuccess = (successMsg: string) => toast.success(successMsg);
+
+  const notifyInfo = (infoMsg: string) => toast(infoMsg);
+
   const product = useSelector((state: RootState) =>
     selectById(state, Number(productId!))
   ) as ProductType | undefined;
 
   const handleAdd = () => {
+    notifySuccess("Item Added To Bag");
     dispatch(
       addToBag({
         id: product?.id!,
@@ -39,11 +46,11 @@ const SingleProduct = (): ReactElement => {
         price: product?.price!,
       })
     );
-    navigate("/inbag");
   };
 
   const handleAddFavorit = () => {
     if (user) {
+      notifyInfo("Item Added to Favorits");
       dispatch(
         addFavoritCoffee({
           id: user.id,
@@ -55,12 +62,13 @@ const SingleProduct = (): ReactElement => {
         })
       );
     } else {
-      navigate("/register");
+      notifyError("You Need to Login First");
     }
   };
 
   const handleRemoveFavort = () => {
     if (user) {
+      notifyInfo("Item Removed from Favorits");
       dispatch(
         removeFavoritCoffee({
           id: user.id,
@@ -68,7 +76,7 @@ const SingleProduct = (): ReactElement => {
         })
       );
     } else {
-      navigate("/register");
+      notifyError("You Need to Login First");
     }
   };
 
@@ -79,9 +87,21 @@ const SingleProduct = (): ReactElement => {
         alt={product?.name}
         className="size-96 block mx-auto "
       />
-
       <section className="p-4 max-w-4xl mx-auto">
-        <article className="w-full "></article>
+        <article className="w-full ">
+          <ToastContainer
+            position="top-center"
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick={false}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+          />
+        </article>
         <p className="flex justify-between items-center text-5xl font-cursive font-bold mb-20">
           <span></span>
           {product?.name}
