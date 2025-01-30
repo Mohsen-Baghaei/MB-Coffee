@@ -1,14 +1,27 @@
 import { ReactElement } from "react";
-import { useSelector } from "react-redux";
-import { inBagItems, totalItem, totalPrice } from "../../app/inBag/inBagSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  inBagItems,
+  StateType,
+  totalItem,
+  totalPrice,
+} from "../../app/inBag/inBagSlice";
 import InBagLine from "./InBagLine";
+import { selectedUsers, submitOrders } from "../../app/register/registerSlice";
+import { useNavigate } from "react-router-dom";
 
 const InBag = (): ReactElement => {
-  const items = useSelector(inBagItems);
-  const totalItems = useSelector(totalItem);
-  const totalPrices = useSelector(totalPrice);
+  const items: StateType[] = useSelector(inBagItems);
+  const totalItems: number = useSelector(totalItem);
+  const totalPrices: string = useSelector(totalPrice);
+
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   const orderedItems = [...items].sort((a, b) => b.id - a.id);
+
+  const user = useSelector(selectedUsers);
 
   const content = orderedItems.length ? (
     orderedItems.map((item) => <InBagLine key={item.id} item={item} />)
@@ -17,6 +30,22 @@ const InBag = (): ReactElement => {
       The Bag Is Empty
     </p>
   );
+
+  const handleSubmit = () => {
+    if (!user) {
+      navigate("/register");
+    } else {
+      dispatch(
+        submitOrders({
+          id: user.id,
+          orders: orderedItems,
+          totalItems,
+          totalPrices,
+        })
+      );
+      navigate("/");
+    }
+  };
 
   return (
     <section className="flex flex-col justify-center items-center w-full p-1 md:p-5">
@@ -34,7 +63,10 @@ const InBag = (): ReactElement => {
           <span className="font-serif">Total Price :</span>
           <span>{totalPrices}</span>
         </p>
-        <button className="w-full sm:w-1/3 p-4 rounded-2xl text-slate-50 bg-primary/70 hover:bg-primary ">
+        <button
+          onClick={handleSubmit}
+          className="w-full sm:w-1/3 p-4 rounded-2xl text-slate-50 bg-primary/70 hover:bg-primary "
+        >
           Continue
         </button>
       </div>

@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
+import { StateType } from "../inBag/inBagSlice";
 
 export type addressType = {
   addressId: number;
@@ -26,6 +27,13 @@ export type userInfoType = {
   job?: string;
 };
 
+export type OrdersType = {
+  orderedId: number;
+  orders: StateType[];
+  totalItems: number;
+  totalPrices: string;
+};
+
 export type usersType = {
   user: string;
   pwd: string;
@@ -34,6 +42,7 @@ export type usersType = {
   userAddress: addressType[];
   userInfo: userInfoType;
   favoritCoffee: favoritCoffeeType[];
+  orderedItems: OrdersType[];
 };
 
 export type UserStateType = {
@@ -71,6 +80,7 @@ const registerSlice = createSlice({
         job: "",
       };
       const favoritCoffee: favoritCoffeeType[] = [];
+      const orderedItems: OrdersType[] = [];
       const duplicate = state.users.find((username) => username.user === user);
       if (duplicate) {
         state.error = "Username Taken";
@@ -84,6 +94,7 @@ const registerSlice = createSlice({
           userAddress,
           userInfo,
           favoritCoffee,
+          orderedItems,
         });
         localStorage.setItem("user", JSON.stringify(state.users));
         state.error = "";
@@ -117,6 +128,31 @@ const registerSlice = createSlice({
         existUser.loggedIn = false;
         localStorage.setItem("user", JSON.stringify(state.users));
         state.error = "";
+      }
+    },
+    submitOrders(
+      state: UserStateType,
+      action: PayloadAction<{
+        id: number;
+        orders: StateType[];
+        totalItems: number;
+        totalPrices: string;
+      }>
+    ) {
+      const { id, orders, totalItems, totalPrices } = action.payload;
+      const existUser = state.users.find((username) => username.id === id);
+
+      if (existUser) {
+        const orderedId: number = existUser.orderedItems.length
+          ? existUser.orderedItems[existUser.orderedItems.length - 1]
+              .orderedId + 1
+          : 1;
+        existUser.orderedItems.push({
+          orderedId,
+          orders,
+          totalItems,
+          totalPrices,
+        });
       }
     },
     userInfoEdit(
@@ -274,6 +310,7 @@ export const {
   deleteAddress,
   addFavoritCoffee,
   removeFavoritCoffee,
+  submitOrders,
 } = registerSlice.actions;
 
 export const selectedUsers = (state: RootState) =>

@@ -28,6 +28,7 @@ const EditUserInfo = lazy(
 );
 const Favorit = lazy(() => import("./components/profile/favorit/Favorit"));
 const Orders = lazy(() => import("./components/profile/order/Orders"));
+const Default = lazy(() => import("./components/profile/Default"));
 
 const App = (): ReactElement => {
   useEffect(() => {
@@ -105,6 +106,14 @@ const App = (): ReactElement => {
             </Suspense>
           }
         >
+          <Route
+            index
+            element={
+              <Suspense fallback={<Loading />}>
+                <Default />
+              </Suspense>
+            }
+          />
           <Route
             path="orders"
             element={

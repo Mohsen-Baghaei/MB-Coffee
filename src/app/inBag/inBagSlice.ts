@@ -10,7 +10,10 @@ export type StateType = {
   price: number;
 };
 
-const initialState: StateType[] = [];
+const initialState: StateType[] =
+  localStorage.getItem("inBag") !== null
+    ? JSON.parse(localStorage.getItem("inBag")!)
+    : [];
 
 const inBagSlice = createSlice({
   name: "inBag",
@@ -28,6 +31,7 @@ const inBagSlice = createSlice({
         ...filteredItems,
         { id, name, img, weight, price, qty },
       ];
+      localStorage.setItem("inBag", JSON.stringify(newState));
       return newState;
     },
     updateQty(
@@ -41,14 +45,17 @@ const inBagSlice = createSlice({
       const filteredItems: StateType[] = state.filter((item) => item.id !== id);
       if (existItem) {
         const newState = [...filteredItems, { ...existItem, qty }];
+        localStorage.setItem("inBag", JSON.stringify(newState));
         return newState;
       }
     },
     deleteItem(state: StateType[], action: PayloadAction<{ id: number }>) {
       const { id } = action.payload;
       const filteredItems: StateType[] = state.filter((item) => item.id !== id);
+      localStorage.setItem("inBag", JSON.stringify(filteredItems));
       return filteredItems;
     },
+    clearItems(state: StateType[]) {},
   },
 });
 
