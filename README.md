@@ -1,4 +1,3 @@
-[] add other api
 [] add pwa
 [] complete shopping
 [] add profile {
@@ -7,8 +6,8 @@
 [x] add favorit items
 [x] add addresses
 [x] add email // phone number // bithday //
-[] add avatar and name to user
+[x] add avatar and name to user
 }
 [] if some one is logged in you can not register or login again
-[] add pop up message for adding to the bag
+[x] add pop up message for adding to the bag
 [] protacted route

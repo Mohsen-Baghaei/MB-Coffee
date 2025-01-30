@@ -2,6 +2,7 @@ import { ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { logoutUser, selectedUsers } from "../../app/register/registerSlice";
+import nologin from "../../assets/profile/nologin.gif";
 
 import { ToastContainer, toast } from "react-toastify";
 
@@ -11,6 +12,7 @@ import favoritCoffee from "../../assets/profile/favoritCoffee.png";
 import info from "../../assets/profile/info.png";
 import log from "../../assets/profile/log.png";
 import orders from "../../assets/profile/orders.png";
+import { clearItems } from "../../app/inBag/inBagSlice";
 
 const Profile = (): ReactElement => {
   const dispatch = useDispatch();
@@ -26,16 +28,15 @@ const Profile = (): ReactElement => {
     notifySuccess("You Logged out Successfuly");
     dispatch(logoutUser({ id: user?.id! }));
     setTimeout(() => {
+      dispatch(clearItems());
       navigate("/");
     }, 3000);
   };
 
   const notifySuccess = (msg: string) => toast.success(msg);
 
-  const notifyError = (errMsg: string) => toast.error(errMsg);
-
   return (
-    <section className="w-full min-h-screen-small sm:min-h-screen-big flex justify-center items-start mx-auto bg-white">
+    <section className="w-full min-h-screen-small sm:min-h-screen-big flex justify-center items-start mx-auto bg-white relative">
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -55,9 +56,19 @@ const Profile = (): ReactElement => {
             Hey {user?.userInfo.firstname ?? user?.user}
           </p>
         </div>
-        <div className="w-full flex items-center gap-4 border-b-2 border-solid border-gray-400 p-5">
+        <Link
+          to="/profile/orders"
+          className="w-full flex items-center gap-4 border-b-2 border-solid border-gray-400 p-5"
+        >
           <img src={orders} alt="orders" className="size-10" />
           <p className="text-xl font-semibold ">Orders</p>
+        </Link>
+        <div
+          className={
+            splitedPath[2] === "orders" ? "block lg:hidden w-full" : "hidden"
+          }
+        >
+          <Outlet />
         </div>
 
         <Link
@@ -115,6 +126,23 @@ const Profile = (): ReactElement => {
       </article>
       <article className="hidden lg:flex lg:w-8/12 xl:w-10/12  flex-col items-start justify-start ">
         <Outlet />
+      </article>
+      <article
+        data-aos="zoom-in"
+        className={
+          !user
+            ? "absolute top-0 right-0 left-0 bottom-0 bg-gray-300/50 flex flex-col gap-6 justify-center items-center"
+            : "hidden"
+        }
+      >
+        <p className="text-3xl font-semibold">You Need to Login First</p>
+        <Link
+          to="/login"
+          className="text-center text-2xl text-gray-100 font-semibold font-serif sm:text-4xl bg-primary/80 hover:bg-primary p-5 rounded-xl"
+        >
+          Login
+        </Link>
+        <img src={nologin} alt="noLogIn" className="size-64" />
       </article>
     </section>
   );

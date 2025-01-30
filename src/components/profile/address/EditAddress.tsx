@@ -30,6 +30,8 @@ const EditAddress = (): ReactElement => {
 
   const notifySuccess = (msg: string) => toast.success(msg);
 
+  const notifyError = (msg: string) => toast.error(msg);
+
   const onStateChange = (e: ChangeEvent<HTMLSelectElement>) =>
     setState(e.target.value);
 
@@ -44,25 +46,29 @@ const EditAddress = (): ReactElement => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    notifySuccess("Address Edited Successfuly");
-    dispatch(
-      updateAddress({
-        id: user?.id!,
-        addressId: Number(addressId),
-        province: state,
-        city,
-        location: addressPath,
-        postalCode: zipCode,
-      })
-    );
+    if (user) {
+      notifySuccess("Address Edited Successfuly");
+      dispatch(
+        updateAddress({
+          id: user?.id!,
+          addressId: Number(addressId),
+          province: state,
+          city,
+          location: addressPath,
+          postalCode: zipCode,
+        })
+      );
 
-    setState(stateOptions[7].name);
-    setCity("");
-    setAddressPath("");
-    setZipCode("");
-    setTimeout(() => {
-      navigate("/profile/address");
-    }, 3000);
+      setState(stateOptions[7].name);
+      setCity("");
+      setAddressPath("");
+      setZipCode("");
+      setTimeout(() => {
+        navigate("/profile/address");
+      }, 3000);
+    } else {
+      notifyError("You Need to Login First");
+    }
   };
   return (
     <>

@@ -55,11 +55,15 @@ const inBagSlice = createSlice({
       localStorage.setItem("inBag", JSON.stringify(filteredItems));
       return filteredItems;
     },
-    clearItems(state: StateType[]) {},
+    clearItems(state: StateType[]) {
+      state.length = 0;
+      localStorage.setItem("inBag", JSON.stringify(state));
+    },
   },
 });
 
-export const { addToBag, updateQty, deleteItem } = inBagSlice.actions;
+export const { addToBag, updateQty, deleteItem, clearItems } =
+  inBagSlice.actions;
 
 export const inBagItems = (state: RootState) => state.inBag;
 

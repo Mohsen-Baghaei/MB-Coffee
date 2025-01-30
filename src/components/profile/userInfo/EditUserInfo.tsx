@@ -49,23 +49,29 @@ const EditUserInfo = (): ReactElement => {
 
   const notifySuccess = (msg: string) => toast.success(msg);
 
+  const notifyError = (msg: string) => toast.error(msg);
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    notifySuccess("Personal InfoUpdated");
-    dispatch(
-      userInfoEdit({
-        id: Number(user?.id),
-        firstname,
-        lastname,
-        email,
-        phoneNumber: Number(phoneNumber),
-        birthday,
-        job,
-      })
-    );
-    setTimeout(() => {
-      navigate("/profile/userinfo");
-    }, 3000);
+    if (user) {
+      notifySuccess("Personal InfoUpdated");
+      dispatch(
+        userInfoEdit({
+          id: Number(user?.id),
+          firstname,
+          lastname,
+          email,
+          phoneNumber: Number(phoneNumber),
+          birthday,
+          job,
+        })
+      );
+      setTimeout(() => {
+        navigate("/profile/userinfo");
+      }, 3000);
+    } else {
+      notifyError("You Need to Login First");
+    }
   };
 
   return (

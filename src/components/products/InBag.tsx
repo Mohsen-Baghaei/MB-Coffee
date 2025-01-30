@@ -1,6 +1,7 @@
 import { ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  clearItems,
   inBagItems,
   StateType,
   totalItem,
@@ -25,6 +26,10 @@ const InBag = (): ReactElement => {
 
   const user = useSelector(selectedUsers);
 
+  const notifyError = (msg: string) => toast.error(msg);
+
+  const notifySuccess = (msg: string) => toast.success(msg);
+
   const content = orderedItems.length ? (
     orderedItems.map((item) => <InBagLine key={item.id} item={item} />)
   ) : (
@@ -37,13 +42,14 @@ const InBag = (): ReactElement => {
     </div>
   );
 
-  const notify = () => toast("This is a toast notification !");
-
   const handleSubmit = () => {
-    notify();
-    /* if (!user) {
-      navigate("/register");
+    if (!user) {
+      notifyError("You Need to Login First");
+      setTimeout(() => {
+        navigate("/register");
+      }, 3000);
     } else {
+      notifySuccess("Purchase Completed");
       dispatch(
         submitOrders({
           id: user.id,
@@ -52,14 +58,28 @@ const InBag = (): ReactElement => {
           totalPrices,
         })
       );
-      navigate("/");
-    } */
+      setTimeout(() => {
+        dispatch(clearItems());
+        navigate("/");
+      }, 3000);
+    }
   };
 
   return (
     <section className="flex flex-col justify-center items-center w-full p-1 md:p-5">
       {content}
-      <ToastContainer />
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <div
         className={`${
           orderedItems.length ? "flex" : "hidden"
@@ -77,7 +97,7 @@ const InBag = (): ReactElement => {
           onClick={handleSubmit}
           className="w-full sm:w-1/3 p-4 rounded-2xl text-slate-50 bg-primary/70 hover:bg-primary "
         >
-          Continue
+          Purchase
         </button>
       </div>
     </section>
