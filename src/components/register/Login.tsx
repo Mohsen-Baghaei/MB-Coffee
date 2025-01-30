@@ -7,6 +7,8 @@ import {
   useState,
 } from "react";
 
+import { ToastContainer, toast } from "react-toastify";
+
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -30,13 +32,11 @@ const Login = (): ReactElement => {
   console.log(hi);
 
   const userRef = useRef<HTMLInputElement>(null);
-  const errRef = useRef<HTMLParagraphElement>(null);
 
   const [user, setUser] = useState<string>("");
 
   const [pwd, setPwd] = useState<string>("");
 
-  const [errMsg, setErrMsg] = useState<string>("");
   const [checkNavigate, setCheckNavigate] = useState<boolean>(false);
 
   useEffect(() => {
@@ -44,18 +44,21 @@ const Login = (): ReactElement => {
   }, []);
 
   useEffect(() => {
-    setErrMsg(error);
-  }, [error]);
-
-  useEffect(() => {
-    setErrMsg("");
-  }, [user, pwd]);
-
-  useEffect(() => {
-    if (!error && user && pwd && loginStatus?.loggedIn === true) {
-      navigate("/");
-      setUser("");
-      setPwd("");
+    if (
+      !error &&
+      user &&
+      pwd &&
+      loginStatus?.loggedIn === true &&
+      checkNavigate === true
+    ) {
+      notifySuccess();
+      setTimeout(() => {
+        setUser("");
+        setPwd("");
+        navigate("/");
+      }, 3000);
+    } else if (error && checkNavigate === true) {
+      notifyError();
     }
     setCheckNavigate(false);
   }, [checkNavigate]);
@@ -73,6 +76,10 @@ const Login = (): ReactElement => {
     setCheckNavigate(true);
   };
 
+  const notifyError = () => toast.error(error);
+
+  const notifySuccess = () => toast.success("You Logged in Successfuly !");
+
   return (
     <div className="bg-primary/50 text-gray-900 flex justify-center items-start lg:items-center min-h-screen">
       <div className=" m-0 sm:m-10 lg:bg-primary/80 shadow sm:rounded-lg flex justify-center flex-1 mt-10 space-y-16">
@@ -81,16 +88,18 @@ const Login = (): ReactElement => {
           data-aos-once="true"
           className="lg:w-1/2 xl:w-5/12 sm:p-12 flex flex-col"
         >
-          <p
-            className={
-              errMsg
-                ? "text-center bg-slate-300 text-red-500 text-sm md:text-base rounded-xl p-3 relative flex outline outline-2 outline-offset-1 outline-red-500 mb-5"
-                : "hidden"
-            }
-            ref={errRef}
-          >
-            {errMsg}
-          </p>
+          <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick={false}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+          />
           <div className=" flex flex-col items-start justify-start">
             <h1 className="text-5xl xl:text-9xl font-cursive lg:mb-10">
               Sign In

@@ -7,15 +7,14 @@ import {
   useState,
 } from "react";
 
+import { ToastContainer, toast } from "react-toastify";
+
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RiInformation2Fill } from "react-icons/ri";
-import {
-  createUser,
-  usersError,
-} from "../../app/register/registerSlice";
+import { createUser, usersError } from "../../app/register/registerSlice";
 
-import {pictutes} from '../../app/data/data'
+import { pictutes } from "../../app/data/data";
 
 const USER_REGEX: RegExp = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX: RegExp =
@@ -30,7 +29,6 @@ const Register = (): ReactElement => {
   const error = useSelector(usersError);
 
   const userRef = useRef<HTMLInputElement>(null);
-  const errRef = useRef<HTMLParagraphElement>(null);
 
   const [user, setUser] = useState<string>("");
   const [validUser, setValidUser] = useState<boolean>(false);
@@ -44,7 +42,6 @@ const Register = (): ReactElement => {
   const [validMatchPwd, setValidMatchPwd] = useState<boolean>(false);
   const [matchPwdFocus, setMatchPwdFocus] = useState<boolean>(false);
 
-  const [errMsg, setErrMsg] = useState<string>("");
   const [checkNavigate, setCheckNavigate] = useState<boolean>(false);
 
   useEffect(() => {
@@ -61,19 +58,23 @@ const Register = (): ReactElement => {
   }, [pwd, matchPwd]);
 
   useEffect(() => {
-    setErrMsg(error);
-  }, [error]);
-
-  useEffect(() => {
-    setErrMsg("");
-  }, [user, pwd, matchPwd]);
-
-  useEffect(() => {
-    if (!error && validUser && validPwd && validMatchPwd) {
-      navigate("/login");
-      setUser("");
-      setPwd("");
-      setMatchPwd("");
+    if (
+      !error &&
+      validUser &&
+      validPwd &&
+      validMatchPwd &&
+      checkNavigate === true
+    ) {
+      notifySuccess();
+      console.log("hi");
+      setTimeout(() => {
+        setUser("");
+        setMatchPwd("");
+        setPwd("");
+        navigate("/login");
+      }, 3000);
+    } else if (error && checkNavigate === true) {
+      notifyError(error);
     }
     setCheckNavigate(false);
   }, [checkNavigate]);
@@ -94,12 +95,16 @@ const Register = (): ReactElement => {
     const v2: boolean = PWD_REGEX.test(pwd);
 
     if (!v1 || !v2) {
-      setErrMsg("Invalid Entry");
+      notifyError("Invalid Entry");
       return;
     }
     dispatch(createUser({ user, pwd }));
     setCheckNavigate(true);
   };
+
+  const notifyError = (errMsg: string) => toast.error(errMsg);
+
+  const notifySuccess = () => toast.success("Account Created Successfuly !");
 
   return (
     <div className="bg-primary/50 text-gray-900 flex justify-center items-start lg:items-center min-h-screen-small sm:min-h-screen-big">
@@ -109,16 +114,18 @@ const Register = (): ReactElement => {
           data-aos-once="true"
           className="lg:w-1/2 xl:w-5/12 sm:p-12 flex flex-col"
         >
-          <p
-            className={
-              errMsg
-                ? "text-center bg-slate-300 text-red-500 text-sm md:text-base rounded-xl p-3 relative flex outline outline-2 outline-offset-1 outline-red-500 mb-5"
-                : "hidden"
-            }
-            ref={errRef}
-          >
-            {errMsg}
-          </p>
+          <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick={false}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+          />
           <div className=" flex flex-col items-start justify-start">
             <h1 className="text-5xl xl:text-9xl font-cursive lg:mb-10">
               Sign up

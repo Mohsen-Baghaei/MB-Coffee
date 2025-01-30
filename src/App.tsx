@@ -1,6 +1,7 @@
 import { ReactElement, useEffect, lazy, Suspense } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import "react-toastify/dist/ReactToastify.css";
 import { Route, Routes } from "react-router-dom";
 
 import Layout from "./components/Layout";

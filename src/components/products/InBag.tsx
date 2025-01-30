@@ -9,6 +9,7 @@ import {
 import InBagLine from "./InBagLine";
 import { selectedUsers, submitOrders } from "../../app/register/registerSlice";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 const InBag = (): ReactElement => {
   const items: StateType[] = useSelector(inBagItems);
@@ -31,8 +32,11 @@ const InBag = (): ReactElement => {
     </p>
   );
 
+  const notify = () => toast("This is a toast notification !");
+
   const handleSubmit = () => {
-    if (!user) {
+    notify();
+    /* if (!user) {
       navigate("/register");
     } else {
       dispatch(
@@ -44,12 +48,13 @@ const InBag = (): ReactElement => {
         })
       );
       navigate("/");
-    }
+    } */
   };
 
   return (
     <section className="flex flex-col justify-center items-center w-full p-1 md:p-5">
       {content}
+      <ToastContainer />
       <div
         className={`${
           orderedItems.length ? "flex" : "hidden"
