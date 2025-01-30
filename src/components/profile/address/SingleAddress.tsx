@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { GrLocationPin } from "react-icons/gr";
+import { ToastContainer, toast } from "react-toastify";
 
 type PropType = {
   address: addressType;
@@ -20,7 +21,10 @@ type PropType = {
 const SingleAddress = ({ address, user }: PropType): ReactElement => {
   const dispatch = useDispatch();
 
+  const notifySuccess = (msg: string) => toast.error(msg);
+
   const handleDeleteAddress = () => {
+    notifySuccess("Address Deleted Successfuly");
     dispatch(deleteAddress({ id: user.id, addressId: address.addressId }));
   };
 
@@ -35,6 +39,18 @@ const SingleAddress = ({ address, user }: PropType): ReactElement => {
       data-aos-once="true"
       className="flex justify-between items-start w-full p-2 border-2 border-solid border-gray-500 rounded-xl"
     >
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <div className="flex flex-col gap-2 w-11/12">
         <p className="flex justify-start items-center gap-2 text-lg sm:text-xl p-2">
           <FaMapLocation className="size-6 text-gray-400" />

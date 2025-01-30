@@ -23,7 +23,7 @@ const Favorit = (): ReactElement => {
           Favorite Coffees
         </p>
       </div>
-      {user?.favoritCoffee ? (
+      {user?.favoritCoffee.length ? (
         <section className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-12 md:gap-6 place-content-center w-full">
           {user?.favoritCoffee?.map((coffee) => (
             <SingleFavorit

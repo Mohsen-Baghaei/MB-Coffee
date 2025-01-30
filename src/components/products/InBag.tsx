@@ -6,6 +6,7 @@ import {
   totalItem,
   totalPrice,
 } from "../../app/inBag/inBagSlice";
+import empty from "../../assets/website/empty.png";
 import InBagLine from "./InBagLine";
 import { selectedUsers, submitOrders } from "../../app/register/registerSlice";
 import { useNavigate } from "react-router-dom";
@@ -27,9 +28,13 @@ const InBag = (): ReactElement => {
   const content = orderedItems.length ? (
     orderedItems.map((item) => <InBagLine key={item.id} item={item} />)
   ) : (
-    <p className="text-3xl font-bold p-10 flex items-center justify-center">
-      The Bag Is Empty
-    </p>
+    <div
+      data-aos="zoom-in"
+      className="flex flex-col w-full justify-center items-center gap-6 my-7"
+    >
+      <p className="text-2xl font-semibold">The Bag is Empty</p>
+      <img src={empty} alt="empty" className="size-48" />
+    </div>
   );
 
   const notify = () => toast("This is a toast notification !");

@@ -1,11 +1,9 @@
 import { ReactElement } from "react";
-import { CiLocationOn, CiLogout } from "react-icons/ci";
-import { FaRegUser } from "react-icons/fa6";
-import { FiShoppingBag } from "react-icons/fi";
-import { MdFavoriteBorder } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { logoutUser, selectedUsers } from "../../app/register/registerSlice";
+
+import { ToastContainer, toast } from "react-toastify";
 
 import avatar from "../../assets/profile/avatar.png";
 import address from "../../assets/profile/address.png";
@@ -25,12 +23,31 @@ const Profile = (): ReactElement => {
   const user = useSelector(selectedUsers);
 
   const handleLogout = () => {
+    notifySuccess("You Logged out Successfuly");
     dispatch(logoutUser({ id: user?.id! }));
-    navigate("/");
+    setTimeout(() => {
+      navigate("/");
+    }, 3000);
   };
+
+  const notifySuccess = (msg: string) => toast.success(msg);
+
+  const notifyError = (errMsg: string) => toast.error(errMsg);
 
   return (
     <section className="w-full min-h-screen-small sm:min-h-screen-big flex justify-center items-start mx-auto bg-white">
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <article className="w-full lg:w-4/12 xl:w-2/12 flex flex-col items-start justify-start p-5">
         <div className="w-full flex items-center gap-4 border-b-2 border-solid border-gray-400 p-5">
           <img src={avatar} alt="avatar" className="size-10" />

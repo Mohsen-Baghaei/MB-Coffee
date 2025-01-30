@@ -4,6 +4,8 @@ import { stateOptions, StateOptionsType } from "../../../app/data/data";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa6";
+import { ToastContainer, toast } from "react-toastify";
+
 const NewAddress = (): ReactElement => {
   const [state, setState] = useState<string>(stateOptions[7].name);
   const [city, setCity] = useState<string>("");
@@ -14,6 +16,8 @@ const NewAddress = (): ReactElement => {
   const navigate = useNavigate();
 
   const { userId } = useParams();
+
+  const notifySuccess = (msg: string) => toast.success(msg);
 
   const onStateChange = (e: ChangeEvent<HTMLSelectElement>) =>
     setState(e.target.value);
@@ -29,7 +33,7 @@ const NewAddress = (): ReactElement => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    notifySuccess("Address Added Successfuly");
     dispatch(
       createAddress({
         id: Number(userId),
@@ -44,7 +48,9 @@ const NewAddress = (): ReactElement => {
     setCity("");
     setAddressPath("");
     setZipCode("");
-    navigate("/profile/address");
+    setTimeout(() => {
+      navigate("/profile/address");
+    }, 3000)
   };
   return (
     <>
@@ -60,7 +66,18 @@ const NewAddress = (): ReactElement => {
           Create Address
         </p>
       </div>
-
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <form
         onSubmit={handleSubmit}
         className="flex flex-col items-center justify-center w-full gap-7 p-5"

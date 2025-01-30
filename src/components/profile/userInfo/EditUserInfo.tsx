@@ -6,6 +6,7 @@ import {
   selectedUsers,
   userInfoEdit,
 } from "../../../app/register/registerSlice";
+import { ToastContainer, toast } from "react-toastify";
 
 const EditUserInfo = (): ReactElement => {
   const user = useSelector(selectedUsers);
@@ -46,8 +47,11 @@ const EditUserInfo = (): ReactElement => {
   const onJobChange = (e: ChangeEvent<HTMLInputElement>) =>
     setJob(e.target.value);
 
+  const notifySuccess = (msg: string) => toast.success(msg);
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    notifySuccess("Personal InfoUpdated");
     dispatch(
       userInfoEdit({
         id: Number(user?.id),
@@ -59,7 +63,9 @@ const EditUserInfo = (): ReactElement => {
         job,
       })
     );
-    navigate("/profile/userinfo");
+    setTimeout(() => {
+      navigate("/profile/userinfo");
+    }, 3000);
   };
 
   return (
@@ -76,6 +82,18 @@ const EditUserInfo = (): ReactElement => {
           Edit Personal Info
         </p>
       </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <form
         onSubmit={handleSubmit}
         className="flex flex-col items-center justify-center w-full gap-7 p-5"

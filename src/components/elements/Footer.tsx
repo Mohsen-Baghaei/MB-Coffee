@@ -5,7 +5,8 @@ import { Link, useLocation } from "react-router-dom";
 const Footer = (): ReactElement => {
   const { pathname } = useLocation();
 
-  const show: boolean = pathname === "/" ? true : false;
+  const show: boolean =
+    pathname === "/" || pathname === "/about" ? true : false;
 
   return (
     <footer
