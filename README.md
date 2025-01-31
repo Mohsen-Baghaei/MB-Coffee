@@ -1,5 +1,5 @@
 [] add pwa
-[] complete shopping
+[x] complete shopping
 [] add profile {
 [x] add logout
 [] add orderd items

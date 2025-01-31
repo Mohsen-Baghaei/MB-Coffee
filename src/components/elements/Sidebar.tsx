@@ -9,6 +9,7 @@ import sign from "../../assets/menu/sign.png";
 import register from "../../assets/menu/register.png";
 import coffeecup from "../../assets/menu/coffeecup.png";
 import barista from "../../assets/menu/barista.png";
+import { selectedUsers } from "../../app/register/registerSlice";
 
 const Sidebar = (): ReactElement => {
   const SidebarStatus: boolean = useSelector(sidebarStatus);
@@ -16,6 +17,8 @@ const Sidebar = (): ReactElement => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
+
+  const user = useSelector(selectedUsers);
 
   const direction = (to: string) => {
     dispatch(closeSidebar());
@@ -61,7 +64,11 @@ const Sidebar = (): ReactElement => {
         </button>
         <button
           onClick={() => direction("/register")}
-          className="flex justify-start items-center p-2 gap-3 bg-primary/70 px-4 py-2 rounded-full hover:scale-105 duration-200"
+          className={
+            user
+              ? "hidden"
+              : "flex justify-start items-center p-2 gap-3 bg-primary/70 px-4 py-2 rounded-full hover:scale-105 duration-200"
+          }
         >
           <img src={register} alt="register" className="size-9 " />
           <p className="text-2xl">Register</p>
