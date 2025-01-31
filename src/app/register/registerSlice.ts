@@ -30,6 +30,7 @@ export type userInfoType = {
 export type OrdersType = {
   orderedId: number;
   orders: StateType[];
+  date: string;
   totalItems: number;
   totalPrices: string;
 };
@@ -147,12 +148,15 @@ const registerSlice = createSlice({
           ? existUser.orderedItems[existUser.orderedItems.length - 1]
               .orderedId + 1
           : 1;
+        const date = new Date().toISOString();
         existUser.orderedItems.push({
           orderedId,
           orders,
           totalItems,
           totalPrices,
+          date,
         });
+        localStorage.setItem("user", JSON.stringify(state.users));
       }
     },
     userInfoEdit(
