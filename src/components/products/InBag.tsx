@@ -46,7 +46,12 @@ const InBag = (): ReactElement => {
     if (!user) {
       notifyError("You Need to Login First");
       setTimeout(() => {
-        navigate("/register");
+        navigate("/login");
+      }, 3000);
+    } else if (!user?.userInfo || !user?.userAddress.length) {
+      notifyError("Please Fill Shipping Address and Information");
+      setTimeout(() => {
+        navigate("/profile");
       }, 3000);
     } else {
       notifySuccess("Purchase Completed");

@@ -14,7 +14,7 @@ const SingleOrder = ({ order }: PropType): ReactElement => {
       data-aos-once="true"
       className="flex flex-col justify-start items-start w-full p-2 border-2 border-solid border-gray-500 rounded-lg"
     >
-      <p className="flex justify-center items-center gap-2">
+      <p className="flex justify-center items-center gap-2 text-xl">
         <span>{`${date[0]}/${date[1]}/${date[2].slice(0, 2)}`}</span>
         <span className="text-gray-500 text-2xl">-</span>
         <span>Total Price {order?.totalPrices}</span>
@@ -26,14 +26,16 @@ const SingleOrder = ({ order }: PropType): ReactElement => {
             key={sOrder.id}
           >
             <img src={sOrder.img} alt={sOrder.img} className="size-28" />
-            <p className="flex flex-col justify-start items-center gap-1">
+            <p className="flex flex-col justify-start items-start gap-1 text-xl w-full">
               <span>{sOrder.name}</span>
-              <span>{sOrder.qty} Coffee</span>
-              <span>
-                {new Intl.NumberFormat("en-US", {
-                  style: "currency",
-                  currency: "USD",
-                }).format(sOrder.price)}
+              <span className="flex justify-between items-center gap-3">
+                <span>{sOrder.qty} Coffee</span>
+                <span>
+                  {new Intl.NumberFormat("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                  }).format(sOrder.price)}
+                </span>
               </span>
               <span>{sOrder.weight} g</span>
             </p>
