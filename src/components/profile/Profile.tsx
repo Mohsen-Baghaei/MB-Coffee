@@ -49,7 +49,7 @@ const Profile = (): ReactElement => {
         theme="dark"
       />
       <article className="w-full lg:w-4/12 xl:w-2/12 flex flex-col items-start justify-start p-5">
-        <div className="w-full flex items-center gap-4 border-b-2 border-solid border-gray-400 p-5">
+        <div className="w-full flex items-center gap-4 border-2 border-solid border-gray-300 p-5 bg-primary/20 rounded-xl mb-1 ">
           <img src={avatar} alt="avatar" className="size-10" />
           <p className="text-xl font-semibold ">
             Hey {user?.userInfo.firstname ?? user?.user}
@@ -57,7 +57,11 @@ const Profile = (): ReactElement => {
         </div>
         <Link
           to="/profile/orders"
-          className="w-full flex items-center gap-4 border-b-2 border-solid border-gray-400 p-5"
+          className={`w-full flex items-center gap-4 border-2 border-solid border-gray-300 p-5 bg-primary/20 hover:bg-primary/40 rounded-xl mb-1 transition-all duration-500 ${
+            splitedPath[2] === "orders"
+              ? "bg-primary/90 hover:bg-primary/90"
+              : ""
+          }`}
         >
           <img src={orders} alt="orders" className="size-10" />
           <p className="text-xl font-semibold ">Orders</p>
@@ -72,7 +76,11 @@ const Profile = (): ReactElement => {
 
         <Link
           to="/profile/favorit"
-          className="w-full flex items-center gap-4 border-b-2 border-solid border-gray-400 p-5"
+          className={`w-full flex items-center gap-4 border-2 border-solid border-gray-300 p-5 bg-primary/20 hover:bg-primary/40 rounded-xl mb-1 transition-all duration-500 ${
+            splitedPath[2] === "favorit"
+              ? "bg-primary/90 hover:bg-primary/90"
+              : ""
+          }`}
         >
           <img src={favoritCoffee} alt="favoritCoffee" className="size-10" />
           <p className="text-xl font-semibold ">Favorite Coffees</p>
@@ -87,7 +95,11 @@ const Profile = (): ReactElement => {
 
         <Link
           to="/profile/userinfo"
-          className="w-full flex items-center gap-4 border-b-2 border-solid border-gray-400 p-5"
+          className={`w-full flex items-center gap-4 border-2 border-solid border-gray-300 p-5 bg-primary/20 hover:bg-primary/40 rounded-xl mb-1 transition-all duration-500 ${
+            splitedPath[2] === "userinfo"
+              ? "bg-primary/90 hover:bg-primary/90"
+              : ""
+          }`}
         >
           <img src={info} alt="info" className="size-10" />
           <p className="text-xl font-semibold ">Personal Info</p>
@@ -102,7 +114,11 @@ const Profile = (): ReactElement => {
 
         <Link
           to="/profile/address"
-          className="w-full flex items-center gap-4 border-b-2 border-solid border-gray-400 p-5"
+          className={`w-full flex items-center gap-4 border-2 border-solid border-gray-300 p-5 bg-primary/20 hover:bg-primary/40 rounded-xl mb-1 transition-all duration-500 ${
+            splitedPath[2] === "address"
+              ? "bg-primary/90 hover:bg-primary/90"
+              : ""
+          }`}
         >
           <img src={address} alt="address" className="size-10" />
           <p className="text-xl font-semibold ">Address</p>
@@ -117,7 +133,7 @@ const Profile = (): ReactElement => {
 
         <button
           onClick={handleLogout}
-          className="w-full flex items-center gap-4 border-b-2 border-solid border-gray-400 p-5"
+          className="w-full flex items-center gap-4 border-2 border-solid border-gray-300 p-5 bg-primary/20 hover:bg-primary/40 rounded-xl mb-1 transition-all duration-500"
         >
           <img src={log} alt="logOut" className="size-10 " />
           <p className="text-xl font-semibold ">Logout</p>

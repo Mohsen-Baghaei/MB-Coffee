@@ -86,12 +86,12 @@ const SingleOrderItems = ({ order, orderedId, id }: PropType): ReactElement => {
           <article key={i}>
             {rate === 1 ? (
               <GiRoundStar
-                className="size-8 md:size-12 text-yellow-400"
+                className="size-8 md:size-12 text-yellow-400 cursor-pointer"
                 onClick={() => handleRating(i)}
               />
             ) : (
               <CiStar
-                className="size-8 md:size-12 text-yellow-400"
+                className="size-8 md:size-12 text-yellow-400 cursor-pointer"
                 onClick={() => handleRating(i)}
               />
             )}
