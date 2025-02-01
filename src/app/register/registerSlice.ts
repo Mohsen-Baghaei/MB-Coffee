@@ -159,6 +159,32 @@ const registerSlice = createSlice({
         localStorage.setItem("user", JSON.stringify(state.users));
       }
     },
+    changeRating(
+      state: UserStateType,
+      action: PayloadAction<{
+        id: number;
+        orderedId: number;
+        singleOrderId: number;
+        rate: number;
+      }>
+    ) {
+      const { id, orderedId, singleOrderId, rate } = action.payload;
+
+      const existUser = state.users.find((username) => username.id === id);
+
+      if (existUser) {
+        const order = existUser.orderedItems.find(
+          (order) => order.orderedId === orderedId
+        );
+        const singleOrder = order?.orders.find(
+          (order) => order.id === singleOrderId
+        );
+        if (singleOrder) {
+          singleOrder.rate = rate;
+          localStorage.setItem("user", JSON.stringify(state.users));
+        }
+      }
+    },
     userInfoEdit(
       state: UserStateType,
       action: PayloadAction<{
@@ -315,6 +341,7 @@ export const {
   addFavoritCoffee,
   removeFavoritCoffee,
   submitOrders,
+  changeRating,
 } = registerSlice.actions;
 
 export const selectedUsers = (state: RootState) =>

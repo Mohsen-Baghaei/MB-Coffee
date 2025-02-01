@@ -8,6 +8,7 @@ export type StateType = {
   qty?: number;
   weight: number;
   price: number;
+  rate?: number;
 };
 
 const initialState: StateType[] =

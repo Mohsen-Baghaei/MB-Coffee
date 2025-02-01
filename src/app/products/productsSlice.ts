@@ -20,6 +20,7 @@ export type ProductType = {
   roast_level: number;
   weight: number;
   _id: string;
+  rate?: number;
 };
 
 const productAdapter = createEntityAdapter({});

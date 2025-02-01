@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { memo, ReactElement } from "react";
 import { FaArrowLeft } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -29,7 +29,7 @@ const Orders = (): ReactElement => {
       <section className="flex flex-col justify-start items-center w-full gap-8">
         {user?.orderedItems.length ? (
           user.orderedItems.map((order) => (
-            <SingleOrder key={order.orderedId} order={order} />
+            <SingleOrder key={order.orderedId} order={order} id={user.id} />
           ))
         ) : (
           <div
@@ -45,4 +45,6 @@ const Orders = (): ReactElement => {
   );
 };
 
-export default Orders;
+const memoizedItem = memo(Orders);
+
+export default memoizedItem;
