@@ -20,7 +20,6 @@ const Profile = (): ReactElement => {
 
   const { pathname } = useLocation();
   const splitedPath = pathname.split("/");
-  console.log(splitedPath[2]);
 
   const user = useSelector(selectedUsers);
 

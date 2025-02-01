@@ -10,6 +10,25 @@ import SingleOrder from "./SingleOrder";
 const Orders = (): ReactElement => {
   const user = useSelector(selectedUsers);
 
+  const sortedOrder = user?.orderedItems.length
+    ? [...user.orderedItems].sort((a, b) => b.orderedId - a.orderedId)
+    : "";
+
+  const content =
+    sortedOrder !== "" ? (
+      sortedOrder.map((order) => (
+        <SingleOrder key={order.orderedId} order={order} id={user?.id!} />
+      ))
+    ) : (
+      <div
+        data-aos="zoom-in"
+        className="flex flex-col w-full justify-center items-center gap-6 my-7"
+      >
+        <p className="text-xl font-semibold">You have No Purchase</p>
+        <img src={empty} alt="empty" className="size-40" />
+      </div>
+    );
+
   return (
     <div className="flex flex-col items-center justify-center w-full gap-7 p-2 sm:p-5">
       <div className="w-full flex justify-between items-center">
@@ -27,19 +46,7 @@ const Orders = (): ReactElement => {
         </div>
       </div>
       <section className="flex flex-col justify-start items-center w-full gap-8">
-        {user?.orderedItems.length ? (
-          user.orderedItems.map((order) => (
-            <SingleOrder key={order.orderedId} order={order} id={user.id} />
-          ))
-        ) : (
-          <div
-            data-aos="zoom-in"
-            className="flex flex-col w-full justify-center items-center gap-6 my-7"
-          >
-            <p className="text-xl font-semibold">You have No Purchase</p>
-            <img src={empty} alt="empty" className="size-40" />
-          </div>
-        )}
+        {content}
       </section>
     </div>
   );
