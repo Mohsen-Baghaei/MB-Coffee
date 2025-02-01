@@ -23,7 +23,7 @@ const Footer = (): ReactElement => {
             >
               MB Coffee
             </a>
-            <p className="  pt-4">
+            <p className="pt-4">
               Crafted Coffee, Cozy Vibes, Unforgettable Moments – Your Perfect
               Espresso Escape
             </p>
@@ -116,6 +116,10 @@ const Footer = (): ReactElement => {
             </article>
           </section>
         </section>
+        <p className="flex flex-col md:flex-row justify-center items-center gap-2 text-2xl pb-5">
+          <span>&copy; All Rights Reserved by : </span>
+          <span> Mohsen Baghaei</span>
+        </p>
       </div>
     </footer>
   );
