@@ -66,7 +66,6 @@ const Register = (): ReactElement => {
       checkNavigate === true
     ) {
       notifySuccess();
-      console.log("hi");
       setTimeout(() => {
         setUser("");
         setMatchPwd("");

@@ -51,11 +51,18 @@ export type UserStateType = {
   error: string;
 };
 
+const getInitialUsers = (): usersType[] => {
+  try {
+    const storedUsers = localStorage.getItem("users");
+    return storedUsers ? JSON.parse(storedUsers) : [];
+  } catch (error) {
+    console.error("Error parsing users from localStorage:", error);
+    return [];
+  }
+};
+
 const initialState: UserStateType = {
-  users:
-    localStorage.getItem("user") !== null
-      ? JSON.parse(localStorage.getItem("user")!)
-      : [],
+  users: getInitialUsers(),
   error: "",
 };
 
@@ -68,123 +75,58 @@ const registerSlice = createSlice({
       action: PayloadAction<{ user: string; pwd: string }>
     ) {
       const { user, pwd } = action.payload;
-      const id: number = state.users.length
+      const id = state.users.length
         ? state.users[state.users.length - 1].id + 1
         : 1;
-      const userAddress: addressType[] = [];
-      const userInfo: userInfoType = {
-        firstname: "",
-        lastname: "",
-        phoneNumber: null,
-        email: "",
-        birthday: "",
-        job: "",
-      };
-      const favoritCoffee: favoritCoffeeType[] = [];
-      const orderedItems: OrdersType[] = [];
-      const duplicate = state.users.find((username) => username.user === user);
+
+      const duplicate = state.users.some((u) => u.user === user);
       if (duplicate) {
         state.error = "Username Taken";
-      } else {
-        const loggedIn = false;
-        state.users.push({
-          id,
-          user,
-          pwd,
-          loggedIn,
-          userAddress,
-          userInfo,
-          favoritCoffee,
-          orderedItems,
-        });
-        localStorage.setItem("user", JSON.stringify(state.users));
-        state.error = "";
+        return;
       }
+
+      state.users.push({
+        id,
+        user,
+        pwd,
+        loggedIn: false,
+        userAddress: [],
+        userInfo: { firstname: "", lastname: "", email: "", phoneNumber: null },
+        favoritCoffee: [],
+        orderedItems: [],
+      });
+      localStorage.setItem("users", JSON.stringify(state.users));
+      state.error = "";
     },
+
     authorizUser(
       state: UserStateType,
       action: PayloadAction<{ user: string; pwd: string }>
     ) {
       const { user, pwd } = action.payload;
-      const existUser = state.users.find(
-        (username) => username.user === user && username.pwd === pwd
+      const targetUser = state.users.find(
+        (u) => u.user === user && u.pwd === pwd
       );
-      if (existUser) {
-        existUser.loggedIn = true;
-        localStorage.setItem("user", JSON.stringify(state.users));
-        state.error = "";
-      } else {
+
+      if (!targetUser) {
         state.error = "Invalid Username or Password";
+        return;
       }
-    },
-    logoutUser(
-      state: UserStateType,
-      action: PayloadAction<{
-        id: number;
-      }>
-    ) {
-      const { id } = action.payload;
-      const existUser = state.users.find((username) => username.id === id);
-      if (existUser) {
-        existUser.loggedIn = false;
-        localStorage.setItem("user", JSON.stringify(state.users));
-        state.error = "";
-      }
-    },
-    submitOrders(
-      state: UserStateType,
-      action: PayloadAction<{
-        id: number;
-        orders: StateType[];
-        totalItems: number;
-        totalPrices: string;
-      }>
-    ) {
-      const { id, orders, totalItems, totalPrices } = action.payload;
-      const existUser = state.users.find((username) => username.id === id);
 
-      if (existUser) {
-        const orderedId: number = existUser.orderedItems.length
-          ? existUser.orderedItems[existUser.orderedItems.length - 1]
-              .orderedId + 1
-          : 1;
-        const date = new Date().toISOString();
-        existUser.orderedItems.push({
-          orderedId,
-          orders,
-          totalItems,
-          totalPrices,
-          date,
-        });
-        localStorage.setItem("user", JSON.stringify(state.users));
+      state.users.forEach((u) => (u.loggedIn = false));
+      targetUser.loggedIn = true;
+      localStorage.setItem("users", JSON.stringify(state.users));
+      state.error = "";
+    },
+
+    logoutUser(state: UserStateType, action: PayloadAction<{ id: number }>) {
+      const user = state.users.find((u) => u.id === action.payload.id);
+      if (user) {
+        user.loggedIn = false;
+        localStorage.setItem("users", JSON.stringify(state.users));
       }
     },
-    changeRating(
-      state: UserStateType,
-      action: PayloadAction<{
-        id: number;
-        orderedId: number;
-        singleOrderId: number;
-        rate: number;
-      }>
-    ) {
-      const { id, orderedId, singleOrderId, rate } = action.payload;
 
-      const existUser = state.users.find((username) => username.id === id);
-
-      if (existUser) {
-        const order = existUser.orderedItems.find(
-          (order) => order.orderedId === orderedId
-        );
-        const singleOrder = order?.orders.find(
-          (order) => order.id === singleOrderId
-        );
-        if (singleOrder) {
-          singleOrder.rate = rate;
-          localStorage.setItem("user", JSON.stringify(state.users));
-        }
-      }
-    },
     userInfoEdit(
       state: UserStateType,
       action: PayloadAction<{
@@ -197,60 +139,13 @@ const registerSlice = createSlice({
         job?: string;
       }>
     ) {
-      const { id, firstname, lastname, email, phoneNumber, birthday, job } =
-        action.payload;
-      const existUser = state.users.find((username) => username.id === id);
-      if (existUser) {
-        existUser.userInfo = {
-          firstname,
-          lastname,
-          email,
-          phoneNumber,
-          birthday,
-          job,
-        };
-        localStorage.setItem("user", JSON.stringify(state.users));
+      const user = state.users.find((u) => u.id === action.payload.id);
+      if (user) {
+        user.userInfo = { ...action.payload };
+        localStorage.setItem("users", JSON.stringify(state.users));
       }
     },
-    addFavoritCoffee(
-      state: UserStateType,
-      action: PayloadAction<{
-        id: number;
-        productId: number;
-        name: string;
-        img: string;
-        weight: number;
-        price: number;
-      }>
-    ) {
-      const { id, productId, name, price, img, weight } = action.payload;
 
-      const existUser = state.users.find((username) => username.id === id);
-
-      if (existUser) {
-        existUser.favoritCoffee.push({ productId, name, price, img, weight });
-        localStorage.setItem("user", JSON.stringify(state.users));
-      }
-    },
-    removeFavoritCoffee(
-      state: UserStateType,
-      action: PayloadAction<{
-        id: number;
-        productId: number;
-      }>
-    ) {
-      const { id, productId } = action.payload;
-
-      const existUser = state.users.find((username) => username.id === id);
-
-      if (existUser) {
-        const filteredFavoritCoffee = existUser.favoritCoffee.filter(
-          (coffee) => coffee.productId !== productId
-        );
-        existUser.favoritCoffee = filteredFavoritCoffee;
-        localStorage.setItem("user", JSON.stringify(state.users));
-      }
-    },
     createAddress(
       state: UserStateType,
       action: PayloadAction<{
@@ -261,24 +156,20 @@ const registerSlice = createSlice({
         postalCode: string;
       }>
     ) {
-      const { id, province, city, location, postalCode } = action.payload;
+      const user = state.users.find((u) => u.id === action.payload.id);
+      if (!user) return;
 
-      const existUser = state.users.find((person) => person.id === id);
-      if (existUser) {
-        const addressId: number = existUser.userAddress?.length
-          ? existUser.userAddress[existUser.userAddress.length - 1].addressId +
-            1
-          : 1;
-        existUser.userAddress.push({
-          addressId,
-          province,
-          city,
-          location,
-          postalCode,
-        });
-        localStorage.setItem("user", JSON.stringify(state.users));
-      }
+      const newAddressId = user.userAddress.length
+        ? user.userAddress[user.userAddress.length - 1].addressId + 1
+        : 1;
+
+      user.userAddress.push({
+        addressId: newAddressId,
+        ...action.payload,
+      });
+      localStorage.setItem("users", JSON.stringify(state.users));
     },
+
     updateAddress(
       state: UserStateType,
       action: PayloadAction<{
@@ -290,45 +181,136 @@ const registerSlice = createSlice({
         postalCode: string;
       }>
     ) {
-      const { id, addressId, province, city, location, postalCode } =
-        action.payload;
+      const user = state.users.find((u) => u.id === action.payload.id);
+      if (!user) return;
 
-      const existUser = state.users.find((person) => person.id === id);
+      const addressIndex = user.userAddress.findIndex(
+        (addr) => addr.addressId === action.payload.addressId
+      );
 
-      const existAddress = existUser?.userAddress.find(
-        (address) => address.addressId === addressId
-      );
-      const filteredAddress = existUser?.userAddress.filter(
-        (address) => address.addressId !== addressId
-      );
-      if (existAddress && existUser && filteredAddress) {
-        existUser.userAddress = [
-          ...filteredAddress,
-          { addressId, province, city, location, postalCode },
-        ];
-        localStorage.setItem("user", JSON.stringify(state.users));
+      if (addressIndex !== -1) {
+        user.userAddress[addressIndex] = { ...action.payload };
+        localStorage.setItem("users", JSON.stringify(state.users));
       }
     },
+
     deleteAddress(
+      state: UserStateType,
+      action: PayloadAction<{ id: number; addressId: number }>
+    ) {
+      const user = state.users.find((u) => u.id === action.payload.id);
+      if (!user) return;
+
+      user.userAddress = user.userAddress.filter(
+        (addr) => addr.addressId !== action.payload.addressId
+      );
+      localStorage.setItem("users", JSON.stringify(state.users));
+    },
+
+    addFavoritCoffee(
       state: UserStateType,
       action: PayloadAction<{
         id: number;
-        addressId: number;
+        productId: number;
+        name: string;
+        img: string;
+        weight: number;
+        price: number;
       }>
     ) {
-      const { id, addressId } = action.payload;
+      const user = state.users.find((u) => u.id === action.payload.id);
+      if (!user) return;
 
-      const existUser = state.users.find((person) => person.id === id);
-      const filteredAddress = existUser?.userAddress.filter(
-        (address) => address.addressId !== addressId
+      const exists = user.favoritCoffee.some(
+        (coffee) => coffee.productId === action.payload.productId
       );
-      if (existUser && filteredAddress) {
-        existUser.userAddress = [...filteredAddress];
-        localStorage.setItem("user", JSON.stringify(state.users));
+
+      if (!exists) {
+        user.favoritCoffee.push({ ...action.payload });
+        localStorage.setItem("users", JSON.stringify(state.users));
+        state.error = "";
+      } else {
+        state.error = "Coffee already in favorites";
+      }
+    },
+
+    removeFavoritCoffee(
+      state: UserStateType,
+      action: PayloadAction<{ id: number; productId: number }>
+    ) {
+      const user = state.users.find((u) => u.id === action.payload.id);
+      if (!user) return;
+
+      user.favoritCoffee = user.favoritCoffee.filter(
+        (coffee) => coffee.productId !== action.payload.productId
+      );
+      localStorage.setItem("users", JSON.stringify(state.users));
+    },
+
+    submitOrders(
+      state: UserStateType,
+      action: PayloadAction<{
+        id: number;
+        orders: StateType[];
+        totalItems: number;
+        totalPrices: string;
+      }>
+    ) {
+      const user = state.users.find((u) => u.id === action.payload.id);
+      if (!user) return;
+
+      const newOrderId = user.orderedItems.length
+        ? user.orderedItems[user.orderedItems.length - 1].orderedId + 1
+        : 1;
+
+      user.orderedItems.push({
+        orderedId: newOrderId,
+        orders: action.payload.orders,
+        totalItems: action.payload.totalItems,
+        totalPrices: action.payload.totalPrices,
+        date: new Date().toISOString(),
+      });
+      localStorage.setItem("users", JSON.stringify(state.users));
+    },
+
+    changeRating(
+      state: UserStateType,
+      action: PayloadAction<{
+        id: number;
+        orderedId: number;
+        singleOrderId: number;
+        rate: number;
+      }>
+    ) {
+      const user = state.users.find((u) => u.id === action.payload.id);
+      if (!user) return;
+
+      const order = user.orderedItems.find(
+        (o) => o.orderedId === action.payload.orderedId
+      );
+      const item = order?.orders.find(
+        (i) => i.id === action.payload.singleOrderId
+      );
+
+      if (item) {
+        item.rate = action.payload.rate;
+        localStorage.setItem("users", JSON.stringify(state.users));
       }
     },
   },
 });
+
+export const selectedUsers = (state: RootState) =>
+  state.register.users.find((u) => u.loggedIn);
+
+export const allUsers = (state: RootState) => state.register.users;
+
+export const selectedAddress = (state: RootState, addressId: number) => {
+  const user = state.register.users.find((u) => u.loggedIn);
+  return user?.userAddress.find((addr) => addr.addressId === addressId);
+};
+
+export const usersError = (state: RootState) => state.register.error;
 
 export const {
   createUser,
@@ -343,22 +325,5 @@ export const {
   submitOrders,
   changeRating,
 } = registerSlice.actions;
-
-export const selectedUsers = (state: RootState) =>
-  state?.register?.users?.find((person) => person.loggedIn === true);
-
-export const allUsers = (state: RootState) => state.register?.users;
-
-export const selectedAddress = (state: RootState, addressId: number) => {
-  const user = state.register?.users?.find(
-    (person) => person.loggedIn === true
-  );
-  const address = user?.userAddress.find(
-    (location) => location.addressId === addressId
-  );
-  return address;
-};
-
-export const usersError = (state: RootState) => state.register?.error;
 
 export default registerSlice.reducer;
