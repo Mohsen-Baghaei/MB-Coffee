@@ -345,12 +345,14 @@ export const {
 } = registerSlice.actions;
 
 export const selectedUsers = (state: RootState) =>
-  state.register?.users?.find((person) => person.loggedIn === true);
+  state?.register?.users?.find((person) => person.loggedIn === true);
 
 export const allUsers = (state: RootState) => state.register?.users;
 
 export const selectedAddress = (state: RootState, addressId: number) => {
-  const user = state.register.users.find((person) => person.loggedIn === true);
+  const user = state.register?.users?.find(
+    (person) => person.loggedIn === true
+  );
   const address = user?.userAddress.find(
     (location) => location.addressId === addressId
   );
