@@ -221,7 +221,7 @@ const EditUserInfo = (): ReactElement => {
               Job
             </label>
             <input
-              type="tel"
+              type="text"
               id="job"
               name="job"
               autoComplete="off"
