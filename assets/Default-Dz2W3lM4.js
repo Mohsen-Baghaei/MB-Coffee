@@ -1,0 +1,1 @@
+import{j as e}from"./index-Bp_plc6F.js";const s="/MB-Coffee/assets/coffeeDefault-C6hPCv7u.png",f=()=>e.jsx("div",{className:"w-full min-h-screen-small min-h-screen-big flex justify-center items-center",children:e.jsx("img",{src:s,alt:"coffeeDefault"})});export{f as default};
