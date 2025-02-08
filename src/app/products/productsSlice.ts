@@ -46,10 +46,10 @@ const productsSlice = createSlice({
     builder.addCase(fetchProducts.fulfilled, (state, action) => {
       state.status = "success";
       productAdapter.upsertMany(state, action.payload);
-    }),
-      builder.addCase(fetchProducts.rejected, (state) => {
-        state.status = "failed";
-      });
+    });
+    builder.addCase(fetchProducts.rejected, (state) => {
+      state.status = "failed";
+    });
   },
 });
 
